@@ -79,12 +79,18 @@ public class VueControleurPotager extends JFrame implements Observer {
         popupMenu.add(menuCarrotte);
         popupMenu.add(menuCerise);
         popupMenu.add(menuChamp);
+        JPanel infos = new JPanel();
         popupMenu.add(menuPeche);
         popupMenu.add(menuSalade);
         popupMenu.add(menuTomate);
         popupMenu.add(menuTerre);
         //ajouterEcouteurClavier(); // si besoin
     }
+    // affichages des données de la météos début
+
+
+
+    // affichages des données de la météos fin
 /*
     private void ajouterEcouteurClavier() {
         addKeyListener(new KeyAdapter() { // new KeyAdapter() { ... } est une instance de classe anonyme, il s'agit d'un objet qui correspond au controleur dans MVC
@@ -126,6 +132,14 @@ public class VueControleurPotager extends JFrame implements Observer {
         JTextField jtf = new JTextField("infos diverses"); // TODO inclure dans mettreAJourAffichage ...
         jtf.setEditable(false);
         infos.add(jtf);
+
+        JTextField info_hydrometrie = new JTextField("hydrométrie");
+        info_hydrometrie.setEditable(false);
+        infos.add(info_hydrometrie);
+
+        JTextField info_temperature = new JTextField("température");
+        info_temperature.setEditable(false);
+        infos.add(info_temperature);
 
         add(infos, BorderLayout.EAST);
 
