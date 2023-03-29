@@ -9,6 +9,7 @@ package modele;
 import modele.environnement.Case;
 import modele.environnement.CaseCultivable;
 import modele.environnement.CaseNonCultivable;
+import modele.environnement.varietes.*;
 
 import java.awt.Point;
 import java.util.Random;
@@ -72,10 +73,39 @@ public class SimulateurPotager {
 
     }
 
-    public void actionUtilisateur(int x, int y) {
+    public void actionUtilisateur(int x, int y,String type) {
         if (grilleCases[x][y] != null) {
-            grilleCases[x][y].actionUtilisateur();
+
+            if(type.equals("SALADE")){
+                ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("SALADE");
+            }
+            else if(type.equals("BANANE")){
+                ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("BANANE");
+            }
+            else if(type.equals("CERISE")){
+                ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("CERISE");
+            }
+            else if(type.equals("CHAMPIGNON")){
+                ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("CHAMPIGNON");
+            }
+            else if(type.equals("TOMATE")){
+                ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("TOMATE");
+            }
+            else if(type.equals("PECHE")){
+                ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("PECHE");
+            }
+            else if(type.equals("CARROTTE")){
+                ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("CARROTTE");
+            }
+
+            else if(type.equals("ANANAS")){
+                ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("ANANAS");
+            }
+            else {
+                ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("TERRE");
+            }
         }
+
     }
 
     private void addEntite(Case e, int x, int y) {

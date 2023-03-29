@@ -1,14 +1,14 @@
 package modele.environnement.varietes;
 
-public class Salade extends Legume {
+public class Tomate extends Legume {
     @Override
     public Varietes getVariete() {
-        return Varietes.SALADE;
+        return Varietes.TOMATE;
     }
 
     @Override
     protected void croissance() {
         // TODO
-        System.out.println("Une salade pousse !!");
+        System.out.println("Une tomate pousse !!");
     }
 }
