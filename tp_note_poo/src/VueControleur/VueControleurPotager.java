@@ -1,6 +1,8 @@
 package VueControleur;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -31,14 +33,30 @@ public class VueControleurPotager extends JFrame implements Observer {
 
     // icones affichées dans la grille
     private ImageIcon icoSalade;
+    private ImageIcon icoChampignon;
+    private ImageIcon icoTomate;
+    private ImageIcon icoAnanas;
+    private ImageIcon icoBanane;
+    private ImageIcon icoCerise;
+    private ImageIcon icoPeche;
+    private ImageIcon icoCarrotte;
     private ImageIcon icoTerre;
     private ImageIcon icoVide;
     private ImageIcon icoMur;
 
 
-    private JLabel[][] tabJLabel; // cases graphique (au moment du rafraichissement, chaque case va être associée à une icône, suivant ce qui est présent dans le modèle)
+    private JLabel[][] tabJLabel;// cases graphique (au moment du rafraichissement, chaque case va être associée à une icône, suivant ce qui est présent dans le modèle)
 
-
+    private JPopupMenu popupMenu = new JPopupMenu();
+    private  JMenuItem menuSalade = new JMenuItem("Salade");
+    private JMenuItem menuCarrotte = new JMenuItem("Carrotte");
+    private JMenuItem menuCerise = new JMenuItem("Cerise");
+    private JMenuItem menuChamp = new JMenuItem("Champignon");
+    private JMenuItem menuBanane = new JMenuItem("Banane");
+    private JMenuItem menuTomate = new JMenuItem("Tomate");
+    private JMenuItem menuPeche = new JMenuItem("Peche");
+    private JMenuItem menuAnanas = new JMenuItem("Ananas");
+    private JMenuItem menuTerre = new JMenuItem("Terre");
     public VueControleurPotager(SimulateurPotager _simulateurPotager) {
         sizeX = simulateurPotager.SIZE_X;
         sizeY = _simulateurPotager.SIZE_Y;
@@ -46,6 +64,25 @@ public class VueControleurPotager extends JFrame implements Observer {
 
         chargerLesIcones();
         placerLesComposantsGraphiques();
+        menuAnanas.setIcon(icoAnanas);
+        menuBanane.setIcon(icoBanane);
+        menuCerise.setIcon(icoCerise);
+        menuCarrotte.setIcon(icoCarrotte);
+        menuChamp.setIcon(icoChampignon);
+        menuPeche.setIcon(icoPeche);
+        menuTomate.setIcon(icoTomate);
+        menuSalade.setIcon(icoSalade);
+        menuTerre.setIcon(icoTerre);
+
+        popupMenu.add(menuAnanas);
+        popupMenu.add(menuBanane);
+        popupMenu.add(menuCarrotte);
+        popupMenu.add(menuCerise);
+        popupMenu.add(menuChamp);
+        popupMenu.add(menuPeche);
+        popupMenu.add(menuSalade);
+        popupMenu.add(menuTomate);
+        popupMenu.add(menuTerre);
         //ajouterEcouteurClavier(); // si besoin
     }
 /*
@@ -65,10 +102,15 @@ public class VueControleurPotager extends JFrame implements Observer {
 */
 
     private void chargerLesIcones() {
-    	// image libre de droits utilisée pour les légumes : https://www.vecteezy.com/vector-art/2559196-bundle-of-fruits-and-vegetables-icons	
-    
-
-        icoSalade = chargerIcone("Images/data.png", 0, 0, 120, 120);//chargerIcone("Images/Pacman.png");
+    	// image libre de droits utilisée pour les légumes : https://www.vecteezy.com/vector-art/2559196-bundle-of-fruits-and-vegetables-icons
+        icoSalade = chargerIcone("Images/data.png", 0, 0, 120, 120);
+        icoAnanas = chargerIcone("Images/data.png", 2374, 781, 120, 120);
+        icoChampignon = chargerIcone("Images/data.png", 396, 0, 120, 120);
+        icoBanane = chargerIcone("Images/data.png", 1951, 1169, 120, 120);
+        icoTomate = chargerIcone("Images/data.png", 3121, 1169, 120, 120);
+        icoCerise = chargerIcone("Images/data.png", 1953, 789, 120, 120);
+        icoPeche = chargerIcone("Images/data.png", 1169, 1192, 120, 120);
+        icoCarrotte = chargerIcone("Images/data.png",395,391,120,120);
         icoVide = chargerIcone("Images/Vide.png");
         icoMur = chargerIcone("Images/Mur.png");
         icoTerre = chargerIcone("Images/Terre.png");
@@ -105,6 +147,8 @@ public class VueControleurPotager extends JFrame implements Observer {
 
         // écouter les évènements
 
+
+
         for (int y = 0; y < sizeY; y++) {
             for (int x = 0; x < sizeX; x++) {
                 final int xx = x; // constantes utiles au fonctionnement de la classe anonyme
@@ -112,14 +156,69 @@ public class VueControleurPotager extends JFrame implements Observer {
                 tabJLabel[x][y].addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        simulateurPotager.actionUtilisateur(xx, yy);
+                        popupMenu.show(tabJLabel[xx][yy],e.getX(),e.getY());
+                        menuAnanas.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                simulateurPotager.actionUtilisateur(xx,yy,"ANANAS");
+                            }
+                        });
+                        menuBanane.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                simulateurPotager.actionUtilisateur(xx,yy,"BANANE");
+                            }
+                        });
+                        menuCarrotte.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                simulateurPotager.actionUtilisateur(xx,yy,"CARROTTE");
+                            }
+                        });
+                        menuCerise.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                simulateurPotager.actionUtilisateur(xx,yy,"CERISE");
+                            }
+                        });
+                        menuChamp.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                simulateurPotager.actionUtilisateur(xx,yy,"CHAMPIGNON");
+                            }
+                        });
+                        menuPeche.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                simulateurPotager.actionUtilisateur(xx,yy,"PECHE");
+                            }
+                        });
+                        menuSalade.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                simulateurPotager.actionUtilisateur(xx,yy,"SALADE");
+                            }
+                        });
+                        menuTomate.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                simulateurPotager.actionUtilisateur(xx,yy,"TOMATE");
+                            }
+                        });
+                        menuTerre.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                simulateurPotager.actionUtilisateur(xx,yy,"TERRE");
+                            }
+                        });
                     }
                 });
             }
         }
+
     }
 
-    
+
     /**
      * Il y a une grille du côté du modèle ( jeu.getGrille() ) et une grille du côté de la vue (tabJLabel)
      */
@@ -134,7 +233,13 @@ public class VueControleurPotager extends JFrame implements Observer {
                     if (legume != null) {
 
                         switch (legume.getVariete()) {
-                            case salade: tabJLabel[x][y].setIcon(icoSalade); break;
+                            case SALADE: tabJLabel[x][y].setIcon(icoSalade); break;
+                            case CHAMPIGNON: tabJLabel[x][y].setIcon(icoChampignon); break;
+                            case CERISE: tabJLabel[x][y].setIcon(icoCerise); break;
+                            case TOMATE: tabJLabel[x][y].setIcon(icoTomate); break;
+                            case BANANE: tabJLabel[x][y].setIcon(icoBanane); break;
+                            case PECHE: tabJLabel[x][y].setIcon(icoPeche); break;
+                            case CARROTTE: tabJLabel[x][y].setIcon(icoCarrotte); break;
                         }
 
                     } else {
