@@ -86,6 +86,17 @@ public class VueControleurPotager extends JFrame implements Observer {
         infos.add(jtf);
 
         add(infos, BorderLayout.EAST);
+        // affichages des données de la météos début
+        JTextField info_hydrometrie = new JTextField("hydrométrie");
+        info_hydrometrie.setEditable(false);
+        infos.add(info_hydrometrie);
+
+        JTextField info_temperature = new JTextField("température");
+        info_temperature.setEditable(false);
+        infos.add(info_temperature);
+
+
+        // affichages des données de la météos fin
 
 
 
