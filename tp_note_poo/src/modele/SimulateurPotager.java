@@ -12,6 +12,8 @@ import modele.environnement.CaseNonCultivable;
 import modele.environnement.varietes.*;
 
 import java.awt.Point;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Random;
 
 
@@ -20,14 +22,28 @@ public class SimulateurPotager {
     public static final int SIZE_X = 20;
     public static final int SIZE_Y = 10;
 
+    public SimulateurMeteo getSimMet() {
+        return simMet;
+    }
+
     private SimulateurMeteo simMet;
 
-    // private HashMap<Case, Point> map = new  HashMap<Case, Point>(); // permet de récupérer la position d'une entité à partir de sa référence
+    public Case[][] getGrilleCases() {
+        return grilleCases;
+    }
+
+    private HashMap<Point, Case> map = new  HashMap<Point, Case>(); // permet de récupérer la position d'une entité à partir de sa référence
     private Case[][] grilleCases = new Case[SIZE_X][SIZE_Y]; // permet de récupérer une entité à partir de ses coordonnées
 
     public SimulateurPotager() {
 
         initialisationDesEntites();
+
+        Date interval_meteo = new Date();
+        interval_meteo.setMinutes(0);
+        interval_meteo.setSeconds(2);
+        simMet = new SimulateurMeteo(this,interval_meteo);
+
 
         simMet = new SimulateurMeteo(this);
 
@@ -73,50 +89,81 @@ public class SimulateurPotager {
 
     }
 
-    public void actionUtilisateur(int x, int y,String type) {
+    public Legume actionUtilisateur(int x, int y,String type) {
         if (grilleCases[x][y] != null) {
 
             if(type.equals("SALADE")){
-                ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("SALADE");
+                Legume l = ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("SALADE");
+                return l;
             }
             else if(type.equals("BANANE")){
-                ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("BANANE");
+                Legume l = ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("BANANE");
+                return l;
             }
             else if(type.equals("CERISE")){
-                ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("CERISE");
+                Legume l = ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("CERISE");
+                return l;
             }
             else if(type.equals("CHAMPIGNON")){
-                ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("CHAMPIGNON");
+                Legume l = ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("CHAMPIGNON");
+                return l;
             }
             else if(type.equals("TOMATE")){
-                ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("TOMATE");
+                Legume l = ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("TOMATE");
+                return l;
             }
             else if(type.equals("PECHE")){
-                ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("PECHE");
+                Legume l = ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("PECHE");
+                return l;
             }
             else if(type.equals("CARROTTE")){
-                ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("CARROTTE");
+                Legume l = ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("CARROTTE");
+                return l;
             }
 
             else if(type.equals("ANANAS")){
-                ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("ANANAS");
+                Legume l = ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("ANANAS");
+                return l;
             }
-            else {
-                ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("TERRE");
+            else if(type.equals("TERRE")) {
+                Legume l = ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("TERRE");
+                return l;
             }
+
+
         }
+        return null;
 
     }
 
     private void addEntite(Case e, int x, int y) {
         grilleCases[x][y] = e;
-        //map.put(e, new Point(x, y));
+        map.put(new Point(x, y),e);
     }
 
 
-    private Case objetALaPosition(Point p) {
+    public Case objetALaPosition(Point p) {
         Case retour = null;
-        return grilleCases[p.x][p.y];
+        return map.get(p);
+    }
+
+    public boolean isCultivable(Case ca){
+        if(ca instanceof CaseCultivable){
+            return true;
+
+        }
+        else{
+            return false;
+        }
+    }
+
+    public boolean isPresentLegume(CaseCultivable cas){
+        if(cas.getLegume() == null){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
 }

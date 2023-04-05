@@ -10,6 +10,22 @@ import modele.SimulateurPotager;
 public abstract class Case implements Runnable {
     protected SimulateurPotager simulateurPotager;
 
+    public void setPrécipitations(int précipitations) {
+        this.précipitations = précipitations;
+    }
+
+    public void setEnsolleillement(int ensolleillement) {
+        this.ensolleillement = ensolleillement;
+    }
+
+    public int getPrécipitations() {
+        return précipitations;
+    }
+
+    public int getEnsolleillement() {
+        return ensolleillement;
+    }
+
     private int précipitations; // TODO : mis à jour par le simulateur de météo pour chaque case ()
     private int ensolleillement;
 
