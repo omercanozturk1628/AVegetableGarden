@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Level;
@@ -18,6 +19,7 @@ import javax.swing.*;
 import modele.SimulateurPotager;
 import modele.environnement.*;
 import modele.environnement.varietes.Legume;
+import modele.environnement.varietes.Varietes;
 
 
 /** Cette classe a deux fonctions :
@@ -44,19 +46,30 @@ public class VueControleurPotager extends JFrame implements Observer {
     private ImageIcon icoVide;
     private ImageIcon icoMur;
 
-
     private JLabel[][] tabJLabel;// cases graphique (au moment du rafraichissement, chaque case va être associée à une icône, suivant ce qui est présent dans le modèle)
 
     private JPopupMenu popupMenu = new JPopupMenu();
     private  JMenuItem menuSalade = new JMenuItem("Salade");
     private JMenuItem menuCarrotte = new JMenuItem("Carrotte");
+
     private JMenuItem menuCerise = new JMenuItem("Cerise");
     private JMenuItem menuChamp = new JMenuItem("Champignon");
     private JMenuItem menuBanane = new JMenuItem("Banane");
     private JMenuItem menuTomate = new JMenuItem("Tomate");
     private JMenuItem menuPeche = new JMenuItem("Peche");
     private JMenuItem menuAnanas = new JMenuItem("Ananas");
-    private JMenuItem menuTerre = new JMenuItem("Terre");
+    private JMenuItem menuTerre = new JMenuItem("Harvest");
+
+    private ArrayList<Point> pointArrayList = new ArrayList<Point>();
+
+    private ArrayList<Point> pointHarvestList = new ArrayList<Point>();
+    private ArrayList<Legume> legumeArrayList = new ArrayList<Legume>();
+    private  JLabel lblLeg = new JLabel(new Integer(legumeArrayList.size()).toString());
+
+    private JLabel lblTemp = new JLabel("10 C");
+
+    private JLabel lblArg = new JLabel("0 €");
+
     public VueControleurPotager(SimulateurPotager _simulateurPotager) {
         sizeX = simulateurPotager.SIZE_X;
         sizeY = _simulateurPotager.SIZE_Y;
@@ -79,7 +92,6 @@ public class VueControleurPotager extends JFrame implements Observer {
         popupMenu.add(menuCarrotte);
         popupMenu.add(menuCerise);
         popupMenu.add(menuChamp);
-        JPanel infos = new JPanel();
         popupMenu.add(menuPeche);
         popupMenu.add(menuSalade);
         popupMenu.add(menuTomate);
@@ -124,24 +136,29 @@ public class VueControleurPotager extends JFrame implements Observer {
 
     private void placerLesComposantsGraphiques() {
         setTitle("A vegetable garden");
-        setSize(540, 250);
+        setSize(1100, 525);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // permet de terminer l'application à la fermeture de la fenêtre
 
+
+        JFrame jFrame = new JFrame();
         JPanel infos = new JPanel();
 
-        JTextField jtf = new JTextField("infos diverses"); // TODO inclure dans mettreAJourAffichage ...
-        jtf.setEditable(false);
-        infos.add(jtf);
-
-        JTextField info_hydrometrie = new JTextField("hydrométrie");
-        info_hydrometrie.setEditable(false);
+        infos.setLayout(new FlowLayout());
+        JLabel info_hydrometrie = new JLabel("hydrométrie:");
         infos.add(info_hydrometrie);
+        JLabel jLabelTemp = new JLabel("Température:");
+        infos.add(jLabelTemp);
+        infos.add(lblTemp);
+        JLabel info_current_legumes = new JLabel("Legumes: ");
+        infos.add(info_current_legumes);
+        infos.add(lblLeg);
 
-        JTextField info_temperature = new JTextField("température");
-        info_temperature.setEditable(false);
-        infos.add(info_temperature);
+        JLabel argentLabel = new JLabel("Argent: ");
+        infos.add(argentLabel);
+        infos.add(lblArg);
 
         add(infos, BorderLayout.EAST);
+        setVisible(true);
 
 
 
@@ -160,9 +177,6 @@ public class VueControleurPotager extends JFrame implements Observer {
         add(grilleJLabels, BorderLayout.CENTER);
 
         // écouter les évènements
-
-
-
         for (int y = 0; y < sizeY; y++) {
             for (int x = 0; x < sizeX; x++) {
                 final int xx = x; // constantes utiles au fonctionnement de la classe anonyme
@@ -174,55 +188,244 @@ public class VueControleurPotager extends JFrame implements Observer {
                         menuAnanas.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                simulateurPotager.actionUtilisateur(xx,yy,"ANANAS");
+                                Point point = new Point(xx,yy);
+                                Case caseGotten = simulateurPotager.objetALaPosition(point);
+                                if(!pointArrayList.contains(point)){
+                                    if(simulateurPotager.isCultivable(caseGotten)){
+                                        if(simulateurPotager.isPresentLegume((CaseCultivable) caseGotten)){
+                                            JOptionPane.showMessageDialog(popupMenu,"Il y a deja un legume!");
+                                        }
+                                        else{
+                                            simulateurPotager.actionUtilisateur(xx,yy,"ANANAS");
+                                            JOptionPane.showMessageDialog(popupMenu,"Un ananas est potagé");
+                                            pointArrayList.add(point);
+                                            if(pointHarvestList.contains(point)){
+                                                pointHarvestList.remove(point);
+                                            }
+
+                                        }
+                                    }
+                                    else{
+                                        JOptionPane.showMessageDialog(popupMenu,"Cette case n'est pas cultivable!");
+                                    }
+
+                                }
+
                             }
                         });
                         menuBanane.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                simulateurPotager.actionUtilisateur(xx,yy,"BANANE");
-                            }
-                        });
-                        menuCarrotte.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                simulateurPotager.actionUtilisateur(xx,yy,"CARROTTE");
+                                Point point = new Point(xx,yy);
+                                Case caseGotten = simulateurPotager.objetALaPosition(point);
+                                if(!pointArrayList.contains(point)){
+                                    if(simulateurPotager.isCultivable(caseGotten)){
+                                        if(simulateurPotager.isPresentLegume((CaseCultivable) caseGotten)){
+                                            JOptionPane.showMessageDialog(popupMenu,"Il y a deja un legume!");
+                                        }
+                                        else{
+                                            simulateurPotager.actionUtilisateur(xx,yy,"BANANE");
+                                            JOptionPane.showMessageDialog(popupMenu,"Un banane est potagé");
+                                            pointArrayList.add(point);
+                                            if(pointHarvestList.contains(point)){
+                                                pointHarvestList.remove(point);
+                                            }
+
+                                        }
+                                    }
+                                    else{
+                                        JOptionPane.showMessageDialog(popupMenu,"Cette case n'est pas cultivable!");
+                                    }
+
+                                }
                             }
                         });
                         menuCerise.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                simulateurPotager.actionUtilisateur(xx,yy,"CERISE");
+                                Point point = new Point(xx,yy);
+                                Case caseGotten = simulateurPotager.objetALaPosition(point);
+                                if(!pointArrayList.contains(point)){
+                                    if(simulateurPotager.isCultivable(caseGotten)){
+                                        if(simulateurPotager.isPresentLegume((CaseCultivable) caseGotten)){
+                                            JOptionPane.showMessageDialog(popupMenu,"Il y a deja un legume!");
+                                        }
+                                        else{
+                                            simulateurPotager.actionUtilisateur(xx,yy,"CERISE");
+                                            JOptionPane.showMessageDialog(popupMenu,"Une cerise est potagé");
+                                            pointArrayList.add(point);
+                                            if(pointHarvestList.contains(point)){
+                                                pointHarvestList.remove(point);
+                                            }
+                                        }
+                                    }
+                                    else{
+                                        JOptionPane.showMessageDialog(popupMenu,"Cette case n'est pas cultivable!");
+                                    }
+
+                                }
                             }
                         });
-                        menuChamp.addActionListener(new ActionListener() {
+                        menuCarrotte.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                simulateurPotager.actionUtilisateur(xx,yy,"CHAMPIGNON");
-                            }
-                        });
-                        menuPeche.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                simulateurPotager.actionUtilisateur(xx,yy,"PECHE");
+                                Point point = new Point(xx,yy);
+                                Case caseGotten = simulateurPotager.objetALaPosition(point);
+                                if(!pointArrayList.contains(point)){
+                                    if(simulateurPotager.isCultivable(caseGotten)){
+                                        if(simulateurPotager.isPresentLegume((CaseCultivable) caseGotten)){
+                                            JOptionPane.showMessageDialog(popupMenu,"Il y a deja un legume!");
+                                        }
+                                        else{
+                                            simulateurPotager.actionUtilisateur(xx,yy,"CARROTTE");
+                                            JOptionPane.showMessageDialog(popupMenu,"Une carrotte est potagé");
+                                            pointArrayList.add(point);
+                                            if(pointHarvestList.contains(point)){
+                                                pointHarvestList.remove(point);
+                                            }
+                                        }
+                                    }
+                                    else{
+                                        JOptionPane.showMessageDialog(popupMenu,"Cette case n'est pas cultivable!");
+                                    }
+
+                                }
                             }
                         });
                         menuSalade.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                simulateurPotager.actionUtilisateur(xx,yy,"SALADE");
+                                Point point = new Point(xx,yy);
+                                Case caseGotten = simulateurPotager.objetALaPosition(point);
+                                if(!pointArrayList.contains(point)){
+                                    if(simulateurPotager.isCultivable(caseGotten)){
+                                        if(simulateurPotager.isPresentLegume((CaseCultivable) caseGotten)){
+                                            JOptionPane.showMessageDialog(popupMenu,"Il y a deja un legume!");
+                                        }
+                                        else{
+                                            simulateurPotager.actionUtilisateur(xx,yy,"SALADE");
+                                            JOptionPane.showMessageDialog(popupMenu,"Une salade est potagé");
+                                            pointArrayList.add(point);
+                                            if(pointHarvestList.contains(point)){
+                                                pointHarvestList.remove(point);
+                                            }
+                                        }
+                                    }
+                                    else{
+                                        JOptionPane.showMessageDialog(popupMenu,"Cette case n'est pas cultivable!");
+                                    }
+
+                                }
+                            }
+                        });
+                        menuChamp.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                Point point = new Point(xx,yy);
+                                Case caseGotten = simulateurPotager.objetALaPosition(point);
+                                if(!pointArrayList.contains(point)){
+                                    if(simulateurPotager.isCultivable(caseGotten)){
+                                        if(simulateurPotager.isPresentLegume((CaseCultivable) caseGotten)){
+                                            JOptionPane.showMessageDialog(popupMenu,"Il y a deja un legume!");
+
+                                        }
+                                        else{
+                                            simulateurPotager.actionUtilisateur(xx,yy,"CHAMPIGNON");
+                                            JOptionPane.showMessageDialog(popupMenu,"Un champignon est potagé");
+                                            pointArrayList.add(point);
+                                            if(pointHarvestList.contains(point)){
+                                                pointHarvestList.remove(point);
+                                            }
+                                        }
+                                    }
+                                    else{
+                                        JOptionPane.showMessageDialog(popupMenu,"Cette case n'est pas cultivable!");
+                                    }
+
+                                }
                             }
                         });
                         menuTomate.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                simulateurPotager.actionUtilisateur(xx,yy,"TOMATE");
+                                Point point = new Point(xx,yy);
+                                Case caseGotten = simulateurPotager.objetALaPosition(point);
+                                if(!pointArrayList.contains(point)){
+                                    if(simulateurPotager.isCultivable(caseGotten)){
+                                        if(simulateurPotager.isPresentLegume((CaseCultivable) caseGotten)){
+                                            JOptionPane.showMessageDialog(popupMenu,"Il y a deja un legume!");
+                                        }
+                                        else{
+                                            simulateurPotager.actionUtilisateur(xx,yy,"TOMATE");
+                                            JOptionPane.showMessageDialog(popupMenu,"Une tomate est potagé");
+                                            pointArrayList.add(point);
+                                            if(pointHarvestList.contains(point)){
+                                                pointHarvestList.remove(point);
+                                            }
+                                        }
+                                    }
+                                    else{
+                                        JOptionPane.showMessageDialog(popupMenu,"Cette case n'est pas cultivable!");
+
+                                    }
+
+                                }
+                            }
+                        });
+                        menuPeche.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                Point point = new Point(xx,yy);
+                                Case caseGotten = simulateurPotager.objetALaPosition(point);
+                                if(!pointArrayList.contains(point)){
+                                    if(simulateurPotager.isCultivable(caseGotten)){
+                                        if(simulateurPotager.isPresentLegume((CaseCultivable) caseGotten)){
+                                            JOptionPane.showMessageDialog(popupMenu,"Il y a deja un legume!");
+                                        }
+                                        else{
+                                            simulateurPotager.actionUtilisateur(xx,yy,"PECHE");
+                                            JOptionPane.showMessageDialog(popupMenu,"Une peche est potagé");
+                                            pointArrayList.add(point);
+                                            if(pointHarvestList.contains(point)){
+                                                pointHarvestList.remove(point);
+                                            }
+                                        }
+                                    }
+                                    else{
+                                        JOptionPane.showMessageDialog(popupMenu,"Cette case n'est pas cultivable!");
+                                    }
+
+                                }
                             }
                         });
                         menuTerre.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                simulateurPotager.actionUtilisateur(xx,yy,"TERRE");
+                                Point point = new Point(xx,yy);
+                                Case caseGotten = simulateurPotager.objetALaPosition(point);
+                                if(!pointHarvestList.contains(point)){
+                                    if(simulateurPotager.isCultivable(caseGotten)){
+                                        if(!simulateurPotager.isPresentLegume((CaseCultivable) caseGotten)){
+                                            JOptionPane.showMessageDialog(popupMenu,"Il y a deja aucun legume!");
+                                        }
+                                        else{
+                                            simulateurPotager.actionUtilisateur(xx,yy,"TERRE");
+                                            JOptionPane.showMessageDialog(popupMenu,"Un legume est harvesté");
+                                            pointHarvestList.add(point);
+                                            if(pointArrayList.contains(point)){
+                                                pointArrayList.remove(point);
+                                            }
+                                            CaseCultivable cs = (CaseCultivable) simulateurPotager.getPlateau()[xx][yy];
+                                            legumeArrayList.add(cs.getLegume());
+
+                                        }
+                                    }
+                                    else{
+                                        JOptionPane.showMessageDialog(popupMenu,"Cette case n'est pas cultivable!");
+                                    }
+
+                                }
+
                             }
                         });
                     }
@@ -247,17 +450,37 @@ public class VueControleurPotager extends JFrame implements Observer {
                     if (legume != null) {
 
                         switch (legume.getVariete()) {
-                            case SALADE: tabJLabel[x][y].setIcon(icoSalade); break;
-                            case CHAMPIGNON: tabJLabel[x][y].setIcon(icoChampignon); break;
-                            case CERISE: tabJLabel[x][y].setIcon(icoCerise); break;
-                            case TOMATE: tabJLabel[x][y].setIcon(icoTomate); break;
-                            case BANANE: tabJLabel[x][y].setIcon(icoBanane); break;
-                            case PECHE: tabJLabel[x][y].setIcon(icoPeche); break;
-                            case CARROTTE: tabJLabel[x][y].setIcon(icoCarrotte); break;
+                            case CARROTTE:
+                                tabJLabel[x][y].setIcon(icoCarrotte);
+                                break;
+                            case SALADE:
+                                tabJLabel[x][y].setIcon(icoSalade);
+                                break;
+
+                            case TOMATE:
+                                tabJLabel[x][y].setIcon(icoTomate);
+                                break;
+                            case CHAMPIGNON:
+                                tabJLabel[x][y].setIcon(icoChampignon);
+                                break;
+                            case PECHE:
+                                tabJLabel[x][y].setIcon(icoPeche);
+                                break;
+                            case BANANE:
+                                tabJLabel[x][y].setIcon(icoBanane);
+                                break;
+                            case ANANAS:
+                                tabJLabel[x][y].setIcon(icoAnanas);
+                                break;
+                            case CERISE:
+                                tabJLabel[x][y].setIcon(icoCerise);
+                                break;
                         }
 
                     } else {
                         tabJLabel[x][y].setIcon(icoTerre);
+                        lblLeg.setText(new Integer(legumeArrayList.size()).toString());
+
                     }
 
                     // si transparence : images avec canal alpha + dessins manuels (voir ci-dessous + créer composant qui redéfinie paint(Graphics g)), se documenter

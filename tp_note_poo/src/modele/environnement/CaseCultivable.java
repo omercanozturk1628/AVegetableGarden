@@ -19,7 +19,7 @@ public class CaseCultivable extends Case {
         }
     }
 
-    public void actionLegumePotager(String type){
+    public Legume actionLegumePotager(String type){
         if(type.equals("SALADE")){
             legume = new Salade();
         }
@@ -45,9 +45,10 @@ public class CaseCultivable extends Case {
         else if(type.equals("ANANAS")){
             legume = new Ananas();
         }
-        else{
+        else if(type.equals("TERRE")){
             legume = null;
         }
+        return legume;
     }
     public Legume getLegume() {
         return legume;
