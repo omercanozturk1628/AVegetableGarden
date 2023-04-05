@@ -12,6 +12,7 @@ import modele.environnement.CaseNonCultivable;
 import modele.environnement.varietes.*;
 
 import java.awt.Point;
+import java.util.Date;
 import java.util.Random;
 
 
@@ -20,7 +21,15 @@ public class SimulateurPotager {
     public static final int SIZE_X = 20;
     public static final int SIZE_Y = 10;
 
+    public SimulateurMeteo getSimMet() {
+        return simMet;
+    }
+
     private SimulateurMeteo simMet;
+
+    public Case[][] getGrilleCases() {
+        return grilleCases;
+    }
 
     // private HashMap<Case, Point> map = new  HashMap<Case, Point>(); // permet de récupérer la position d'une entité à partir de sa référence
     private Case[][] grilleCases = new Case[SIZE_X][SIZE_Y]; // permet de récupérer une entité à partir de ses coordonnées
@@ -29,7 +38,12 @@ public class SimulateurPotager {
 
         initialisationDesEntites();
 
-        simMet = new SimulateurMeteo(this);
+        //simMet = new SimulateurMeteo(this);
+        // météo
+        Date interval_meteo = new Date();
+        interval_meteo.setMinutes(0);
+        interval_meteo.setSeconds(2);
+        simMet = new SimulateurMeteo(this,interval_meteo);
 
     }
 
@@ -38,7 +52,7 @@ public class SimulateurPotager {
     public Case[][] getPlateau() {
         return grilleCases;
     }
-    
+
     private void initialisationDesEntites() {
 
         // murs extérieurs horizontaux
@@ -65,7 +79,6 @@ public class SimulateurPotager {
                 if (rnd.nextBoolean()) {
                     cc.actionUtilisateur();
                 }
-
                 Ordonnanceur.getOrdonnanceur().add(cc);
 
             }
@@ -114,9 +127,8 @@ public class SimulateurPotager {
     }
 
 
-    private Case objetALaPosition(Point p) {
+    public Case objetALaPosition(Point p) {
         Case retour = null;
         return grilleCases[p.x][p.y];
     }
-
 }

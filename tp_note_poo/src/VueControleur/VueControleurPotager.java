@@ -86,11 +86,7 @@ public class VueControleurPotager extends JFrame implements Observer {
         popupMenu.add(menuTerre);
         //ajouterEcouteurClavier(); // si besoin
     }
-    // affichages des données de la météos début
 
-
-
-    // affichages des données de la météos fin
 /*
     private void ajouterEcouteurClavier() {
         addKeyListener(new KeyAdapter() { // new KeyAdapter() { ... } est une instance de classe anonyme, il s'agit d'un objet qui correspond au controleur dans MVC
@@ -124,23 +120,25 @@ public class VueControleurPotager extends JFrame implements Observer {
 
     private void placerLesComposantsGraphiques() {
         setTitle("A vegetable garden");
-        setSize(540, 250);
+        setSize(900, 450);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // permet de terminer l'application à la fermeture de la fenêtre
-
         JPanel infos = new JPanel();
-
         JTextField jtf = new JTextField("infos diverses"); // TODO inclure dans mettreAJourAffichage ...
         jtf.setEditable(false);
         infos.add(jtf);
-
+        // affichages des données de la météos début
+        // todo afficher les données du simulateur météo
+        //simulateurPotager.getSimMet().getMeteo()
         JTextField info_hydrometrie = new JTextField("hydrométrie");
         info_hydrometrie.setEditable(false);
         infos.add(info_hydrometrie);
-
+        Point current = new Point(0,0);
+        JLabel label_precipitation = new JLabel(String.valueOf(simulateurPotager.objetALaPosition(current).getPrécipitations()));
+        infos.add(label_precipitation);
         JTextField info_temperature = new JTextField("température");
         info_temperature.setEditable(false);
         infos.add(info_temperature);
-
+    // affichages des données de la météos fin
         add(infos, BorderLayout.EAST);
 
 
@@ -259,7 +257,6 @@ public class VueControleurPotager extends JFrame implements Observer {
                     } else {
                         tabJLabel[x][y].setIcon(icoTerre);
                     }
-
                     // si transparence : images avec canal alpha + dessins manuels (voir ci-dessous + créer composant qui redéfinie paint(Graphics g)), se documenter
                     //BufferedImage bi = getImage("Images/smick.png", 0, 0, 20, 20);
                     //tabJLabel[x][y].getGraphics().drawImage(bi, 0, 0, null);
