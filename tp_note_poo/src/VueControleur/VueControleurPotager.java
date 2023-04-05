@@ -70,6 +70,8 @@ public class VueControleurPotager extends JFrame implements Observer {
 
     private JLabel lblArg = new JLabel("0 €");
 
+    private JLabel label_precipitation = new JLabel();
+
     public VueControleurPotager(SimulateurPotager _simulateurPotager) {
         sizeX = simulateurPotager.SIZE_X;
         sizeY = _simulateurPotager.SIZE_Y;
@@ -138,27 +140,29 @@ public class VueControleurPotager extends JFrame implements Observer {
         setTitle("A vegetable garden");
         setSize(1100, 525);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // permet de terminer l'application à la fermeture de la fenêtre
-
-
-        JFrame jFrame = new JFrame();
         JPanel infos = new JPanel();
-
-        infos.setLayout(new FlowLayout());
-        JLabel info_hydrometrie = new JLabel("hydrométrie:");
+        // affichages des données de la météos début
+        // todo afficher les données du simulateur météo
+        //simulateurPotager.getSimMet().getMeteo()
+        JLabel info_hydrometrie = new JLabel("hydrométrie: ");
         infos.add(info_hydrometrie);
-        JLabel jLabelTemp = new JLabel("Température:");
-        infos.add(jLabelTemp);
+        Point current = new Point(0,0);
+        JLabel info_precipitation = new JLabel("Precipitation: ");
+        infos.add(info_precipitation);
+        label_precipitation.setText(String.valueOf(simulateurPotager.objetALaPosition(current).getPrécipitations()));
+        infos.add(label_precipitation);
+        JLabel info_temperature = new JLabel("température: ");
+        infos.add(info_temperature);
         infos.add(lblTemp);
-        JLabel info_current_legumes = new JLabel("Legumes: ");
-        infos.add(info_current_legumes);
+        JLabel info_leg = new JLabel("Legumes: ");
+        infos.add(info_leg);
         infos.add(lblLeg);
-
-        JLabel argentLabel = new JLabel("Argent: ");
-        infos.add(argentLabel);
+        JLabel info_arg = new JLabel("Argent: ");
+        infos.add(info_arg);
         infos.add(lblArg);
-
+        // affichages des données de la météos fin
         add(infos, BorderLayout.EAST);
-        setVisible(true);
+
 
 
 
@@ -440,57 +444,61 @@ public class VueControleurPotager extends JFrame implements Observer {
      * Il y a une grille du côté du modèle ( jeu.getGrille() ) et une grille du côté de la vue (tabJLabel)
      */
     private void mettreAJourAffichage() {
+        while(true) {
+            label_precipitation.setText(String.valueOf(simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations()));
 
-        for (int x = 0; x < sizeX; x++) {
-            for (int y = 0; y < sizeY; y++) {
-                if (simulateurPotager.getPlateau()[x][y] instanceof CaseCultivable) { // si la grille du modèle contient un Pacman, on associe l'icône Pacman du côté de la vue
 
-                    Legume legume = ((CaseCultivable) simulateurPotager.getPlateau()[x][y]).getLegume();
+            for (int x = 0; x < sizeX; x++) {
+                for (int y = 0; y < sizeY; y++) {
+                    if (simulateurPotager.getPlateau()[x][y] instanceof CaseCultivable) { // si la grille du modèle contient un Pacman, on associe l'icône Pacman du côté de la vue
 
-                    if (legume != null) {
+                        Legume legume = ((CaseCultivable) simulateurPotager.getPlateau()[x][y]).getLegume();
 
-                        switch (legume.getVariete()) {
-                            case CARROTTE:
-                                tabJLabel[x][y].setIcon(icoCarrotte);
-                                break;
-                            case SALADE:
-                                tabJLabel[x][y].setIcon(icoSalade);
-                                break;
+                        if (legume != null) {
 
-                            case TOMATE:
-                                tabJLabel[x][y].setIcon(icoTomate);
-                                break;
-                            case CHAMPIGNON:
-                                tabJLabel[x][y].setIcon(icoChampignon);
-                                break;
-                            case PECHE:
-                                tabJLabel[x][y].setIcon(icoPeche);
-                                break;
-                            case BANANE:
-                                tabJLabel[x][y].setIcon(icoBanane);
-                                break;
-                            case ANANAS:
-                                tabJLabel[x][y].setIcon(icoAnanas);
-                                break;
-                            case CERISE:
-                                tabJLabel[x][y].setIcon(icoCerise);
-                                break;
+                            switch (legume.getVariete()) {
+                                case CARROTTE:
+                                    tabJLabel[x][y].setIcon(icoCarrotte);
+                                    break;
+                                case SALADE:
+                                    tabJLabel[x][y].setIcon(icoSalade);
+                                    break;
+
+                                case TOMATE:
+                                    tabJLabel[x][y].setIcon(icoTomate);
+                                    break;
+                                case CHAMPIGNON:
+                                    tabJLabel[x][y].setIcon(icoChampignon);
+                                    break;
+                                case PECHE:
+                                    tabJLabel[x][y].setIcon(icoPeche);
+                                    break;
+                                case BANANE:
+                                    tabJLabel[x][y].setIcon(icoBanane);
+                                    break;
+                                case ANANAS:
+                                    tabJLabel[x][y].setIcon(icoAnanas);
+                                    break;
+                                case CERISE:
+                                    tabJLabel[x][y].setIcon(icoCerise);
+                                    break;
+                            }
+
+                        } else {
+                            tabJLabel[x][y].setIcon(icoTerre);
+                            lblLeg.setText(new Integer(legumeArrayList.size()).toString());
+
                         }
 
+                        // si transparence : images avec canal alpha + dessins manuels (voir ci-dessous + créer composant qui redéfinie paint(Graphics g)), se documenter
+                        //BufferedImage bi = getImage("Images/smick.png", 0, 0, 20, 20);
+                        //tabJLabel[x][y].getGraphics().drawImage(bi, 0, 0, null);
+                    } else if (simulateurPotager.getPlateau()[x][y] instanceof CaseNonCultivable) {
+                        tabJLabel[x][y].setIcon(icoMur);
                     } else {
-                        tabJLabel[x][y].setIcon(icoTerre);
-                        lblLeg.setText(new Integer(legumeArrayList.size()).toString());
 
+                        tabJLabel[x][y].setIcon(icoVide);
                     }
-
-                    // si transparence : images avec canal alpha + dessins manuels (voir ci-dessous + créer composant qui redéfinie paint(Graphics g)), se documenter
-                    //BufferedImage bi = getImage("Images/smick.png", 0, 0, 20, 20);
-                    //tabJLabel[x][y].getGraphics().drawImage(bi, 0, 0, null);
-                } else if (simulateurPotager.getPlateau()[x][y] instanceof CaseNonCultivable) {
-                    tabJLabel[x][y].setIcon(icoMur);
-                } else {
-
-                    tabJLabel[x][y].setIcon(icoVide);
                 }
             }
         }
