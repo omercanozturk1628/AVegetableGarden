@@ -66,11 +66,11 @@ public class VueControleurPotager extends JFrame implements Observer {
     private ArrayList<Legume> legumeArrayList = new ArrayList<Legume>();
     private  JLabel lblLeg = new JLabel(new Integer(legumeArrayList.size()).toString());
 
-    private JLabel lblTemp = new JLabel("10 C");
+   private JLabel label_precipitation = new JLabel();
+    private JLabel label_temperature = new JLabel();
+    private JLabel lblArg = new JLabel("€");
 
-    private JLabel lblArg = new JLabel("0 €");
 
-    private JLabel label_precipitation = new JLabel();
 
     public VueControleurPotager(SimulateurPotager _simulateurPotager) {
         sizeX = simulateurPotager.SIZE_X;
@@ -143,17 +143,16 @@ public class VueControleurPotager extends JFrame implements Observer {
         JPanel infos = new JPanel();
         // affichages des données de la météos début
         // todo afficher les données du simulateur météo
-        //simulateurPotager.getSimMet().getMeteo()
-        JLabel info_hydrometrie = new JLabel("hydrométrie: ");
-        infos.add(info_hydrometrie);
         Point current = new Point(0,0);
         JLabel info_precipitation = new JLabel("Precipitation: ");
         infos.add(info_precipitation);
+
         label_precipitation.setText(String.valueOf(simulateurPotager.objetALaPosition(current).getPrécipitations()));
         infos.add(label_precipitation);
         JLabel info_temperature = new JLabel("température: ");
         infos.add(info_temperature);
-        infos.add(lblTemp);
+        label_temperature.setText(String.valueOf(simulateurPotager.objetALaPosition(current).getEnsolleillement()));
+        infos.add(label_temperature);
         JLabel info_leg = new JLabel("Legumes: ");
         infos.add(info_leg);
         infos.add(lblLeg);
@@ -446,7 +445,7 @@ public class VueControleurPotager extends JFrame implements Observer {
     private void mettreAJourAffichage() {
         while(true) {
             label_precipitation.setText(String.valueOf(simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations()));
-
+            label_temperature.setText(String.valueOf(simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()));
 
             for (int x = 0; x < sizeX; x++) {
                 for (int y = 0; y < sizeY; y++) {

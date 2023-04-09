@@ -47,43 +47,27 @@ public class SimulateurMeteo implements Runnable {
     @Override
     public void run() {
         // TODO
-        int min_hydrometrie=0;
-        int max_hydrometrie=100;
-        int min_temperature=-10;
-        int max_temperature=40;
-        int temperature;
-        int hydrometrie;
-        Random r = new Random();
-        temperature=  min_temperature + r.nextInt() * (max_temperature - min_temperature);
-        hydrometrie=  min_hydrometrie + r.nextInt() * (max_hydrometrie - min_hydrometrie);
+        int min_precipitations=0;
+        int max_precipitations=100;
+        int min_ensolleillement=-1;
+        int max_ensolleillement=42;
+        Random nb_aleatoire = new Random();
+        int precipitations = nb_aleatoire.nextInt(max_precipitations-min_precipitations) + min_precipitations;
+        int ensolleillement = nb_aleatoire.nextInt(max_ensolleillement-min_ensolleillement) + min_ensolleillement;;
         //change la meteo de chaque case du tableau
         for(int i=0; i<this.simPot.getGrilleCases().length; i++) {
             for(int j=0; j<this.simPot.getGrilleCases()[i].length; j++) {
-                // on génère les précipitations et l'ensoleillement au hazard
+                // change la valeurs des précipitations et l'ensoleillement de chaque case
                 Point current = new Point(i,j);
                 if(this.simPot.objetALaPosition(current)!=null) {
-                    Case current_case=this.simPot.objetALaPosition(current);
-                    current_case.setEnsolleillement(temperature);
-                    current_case.setPrécipitations(hydrometrie);
+                    this.simPot.objetALaPosition(current).setPrécipitations(precipitations);
+                    this.simPot.objetALaPosition(current).setEnsolleillement(ensolleillement);
                 }
-                //this.simPot.getGrilleCases()[i][j].setPrécipitations(hydrometrie);
             }
         }
 
 
-        /*
-        //on choisi une meteo au hazard dans la liste de meteo
-        int random_meteo_index_ = (int)(Math.random() * liste_meteo_possible.size());
-        meteo=liste_meteo_possible.get(random_meteo_index_);
-        // on génère l'hydrométrie et la temperature au hazard
-        int min_hydrometrie=0;
-        int max_hydrometrie=100;
-        int min_temperature=-10;
-        int max_temperature=40;
-        Random r = new Random();
-        temperature=  min_temperature + r.nextFloat() * (max_temperature - min_temperature);
-        hydrometrie=  min_hydrometrie + r.nextFloat() * (max_hydrometrie - min_hydrometrie);
-        */
+
     }
 }
 
