@@ -81,9 +81,7 @@ public class SimulateurPotager {
                 if (rnd.nextBoolean()) {
                     cc.actionUtilisateur();
                 }
-
                 Ordonnanceur.getOrdonnanceur().add(cc);
-
             }
         }
 
