@@ -148,7 +148,6 @@ public class SimulateurPotager {
     public boolean isCultivable(Case ca){
         if(ca instanceof CaseCultivable){
             return true;
-
         }
         else{
             return false;
