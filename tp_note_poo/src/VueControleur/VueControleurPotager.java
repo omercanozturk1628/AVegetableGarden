@@ -66,13 +66,17 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
 
     private ArrayList<Point> pointHarvestList = new ArrayList<Point>();
     private ArrayList<Legume> legumeArrayList = new ArrayList<Legume>();
-    private  JLabel lblLeg = new JLabel(new Integer(legumeArrayList.size()).toString());
-
-   private JLabel label_precipitation = new JLabel();
-    private JLabel label_temperature = new JLabel();
-    private JLabel lblArg = new JLabel("€");
 
 
+   private JLabel valeur_precipitation = new JLabel();
+    private JLabel texte_precipitation = new JLabel("Precipitation: ");
+    private JLabel valeur_temperature = new JLabel();
+    private JLabel texte_temperature = new JLabel("température: ");
+    JLabel texte_legume = new JLabel("Legumes: ");
+    JLabel texte_argent = new JLabel("Argent: ");
+
+    // verifier si on peut inserer un legume
+    private boolean a_deja_legume;
 
     public VueControleurPotager(SimulateurPotager _simulateurPotager) {
         sizeX = simulateurPotager.SIZE_X;
@@ -146,22 +150,14 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
         JPanel infos = new JPanel();
         // affichages des données de la météos début
         // todo afficher les données du simulateur météo
-        Point current = new Point(0,0);
-        JLabel info_precipitation = new JLabel("Precipitation: ");
-        infos.add(info_precipitation);
+        Point current = new Point(0,0);// on recupere la meteo
+        infos.add(texte_precipitation);
+        infos.add(valeur_precipitation);
+        infos.add(texte_temperature);
+        infos.add(valeur_temperature);
+        infos.add(texte_legume);
 
-        label_precipitation.setText(String.valueOf(simulateurPotager.objetALaPosition(current).getPrécipitations()));
-        infos.add(label_precipitation);
-        JLabel info_temperature = new JLabel("température: ");
-        infos.add(info_temperature);
-        label_temperature.setText(String.valueOf(simulateurPotager.objetALaPosition(current).getEnsolleillement()));
-        infos.add(label_temperature);
-        JLabel info_leg = new JLabel("Legumes: ");
-        infos.add(info_leg);
-        infos.add(lblLeg);
-        JLabel info_arg = new JLabel("Argent: ");
-        infos.add(info_arg);
-        infos.add(lblArg);
+        infos.add(texte_argent);
         // affichages des données de la météos fin
         add(infos, BorderLayout.EAST);
 
@@ -198,6 +194,15 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
                         // si la case est cultivable on affiche le menu d'option
                         if(simulateurPotager.isCultivable(caseGotten)) {
                             popupMenu.show(tabJLabel[xx][yy], e.getX(), e.getY());
+                            // si il a deja un legume sur sur la case on peut pas planter
+                            if(simulateurPotager.isPresentLegume((CaseCultivable) caseGotten)) {
+                                a_deja_legume=true;
+                            }
+                            else {
+                                // si il a pas de legume on peut planter
+                                a_deja_legume=false;
+                            }
+
                         }
 
                     }
@@ -212,8 +217,14 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
 //les traitements des différentes option du menu déroulant
     ActionListener menuListenerAnanas = new ActionListener() {
         public void actionPerformed(ActionEvent event) {
-            System.out.println("annanas ["
-                    + event.getActionCommand() + "] was pressed.");
+            if(!a_deja_legume) {
+                System.out.println("annanas ["
+                        + event.getActionCommand() + "] was pressed.");
+            }
+            else {
+                System.out.println("il a deja un legume sur cette case");
+            }
+
         }
     };
 
@@ -225,13 +236,18 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
         }
     };
 
+    public boolean check_if_already_vegetable() {
+
+        return false;
+    }
+
     /**
      * Il y a une grille du côté du modèle ( jeu.getGrille() ) et une grille du côté de la vue (tabJLabel)
      */
     private void mettreAJourAffichage() {
         while(true) {
-            label_precipitation.setText(String.valueOf(simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations() + " %"));
-            label_temperature.setText(String.valueOf(simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement() + " °"));
+            valeur_precipitation.setText(String.valueOf(simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations() + " %"));
+            valeur_temperature.setText(String.valueOf(simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement() + " °"));
 
             for (int x = 0; x < sizeX; x++) {
                 for (int y = 0; y < sizeY; y++) {
@@ -271,8 +287,6 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
 
                         } else {
                             tabJLabel[x][y].setIcon(icoTerre);
-                            lblLeg.setText(new Integer(legumeArrayList.size()).toString());
-
                         }
 
                         // si transparence : images avec canal alpha + dessins manuels (voir ci-dessous + créer composant qui redéfinie paint(Graphics g)), se documenter
