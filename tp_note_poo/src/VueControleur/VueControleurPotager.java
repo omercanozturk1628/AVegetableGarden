@@ -198,16 +198,32 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
                         // si la case est cultivable on affiche le menu d'option
                         if(simulateurPotager.isCultivable(caseGotten)) {
                             popupMenu.show(tabJLabel[xx][yy], e.getX(), e.getY());
-                            // si
                         }
 
                     }
                 });
             }
         }
-
+        //on ajoute un listener pour chaque variete
+        menuAnanas.addActionListener(menuListenerAnanas);
+        menuRecolte.addActionListener(menuListenerRecolte);
     }
 
+//les traitements des différentes option du menu déroulant
+    ActionListener menuListenerAnanas = new ActionListener() {
+        public void actionPerformed(ActionEvent event) {
+            System.out.println("annanas ["
+                    + event.getActionCommand() + "] was pressed.");
+        }
+    };
+
+    // TODO si il a un legume on le supprime
+    ActionListener menuListenerRecolte = new ActionListener() {
+        public void actionPerformed(ActionEvent event) {
+            System.out.println("le legume a ete retire ["
+                    + event.getActionCommand() + "] was pressed.");
+        }
+    };
 
     /**
      * Il y a une grille du côté du modèle ( jeu.getGrille() ) et une grille du côté de la vue (tabJLabel)
