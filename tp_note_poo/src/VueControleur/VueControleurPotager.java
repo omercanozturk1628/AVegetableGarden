@@ -209,37 +209,37 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
                 });
             }
         }
-        //on ajoute un listener pour chaque variete
-        menuAnanas.addActionListener(menuListenerAnanas);
-        menuRecolte.addActionListener(menuListenerRecolte);
+        //on ajoute à chaque option du menu le même listener
+        menuAnanas.addActionListener(menuListener);
+        menuRecolte.addActionListener(menuListener);
+
     }
 
 //les traitements des différentes option du menu déroulant
-    ActionListener menuListenerAnanas = new ActionListener() {
+    ActionListener menuListener = new ActionListener() {
+    //action pour Ananas
         public void actionPerformed(ActionEvent event) {
-            if(!a_deja_legume) {
-                System.out.println("annanas ["
+            if(event.getActionCommand()=="Ananas") {
+                if(!a_deja_legume) {
+                    System.out.println("annanas ["
+                            + event.getActionCommand() + "] was pressed.");
+                }
+                else {
+                    System.out.println("il a deja un legume sur cette case");
+                }
+            }
+        //action pour Récolter
+            if(event.getActionCommand()=="récolter") {
+                System.out.println("le legume a ete retire ["
                         + event.getActionCommand() + "] was pressed.");
             }
-            else {
-                System.out.println("il a deja un legume sur cette case");
-            }
-
         }
     };
 
-    // TODO si il a un legume on le supprime
-    ActionListener menuListenerRecolte = new ActionListener() {
-        public void actionPerformed(ActionEvent event) {
-            System.out.println("le legume a ete retire ["
-                    + event.getActionCommand() + "] was pressed.");
-        }
-    };
 
-    public boolean check_if_already_vegetable() {
 
-        return false;
-    }
+
+
 
     /**
      * Il y a une grille du côté du modèle ( jeu.getGrille() ) et une grille du côté de la vue (tabJLabel)
