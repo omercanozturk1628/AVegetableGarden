@@ -8,7 +8,7 @@ public class Ananas extends Legume {
 
     @Override
     protected void croissance() {
-        // TODO
+        // TODO condition de croissance, faire grossir l'image quand l'annanas pousse
         System.out.println("Une ananas pousse !!");
     }
 }

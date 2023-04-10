@@ -49,6 +49,7 @@ public class VueControleurPotager extends JFrame implements Observer {
     private JLabel[][] tabJLabel;// cases graphique (au moment du rafraichissement, chaque case va être associée à une icône, suivant ce qui est présent dans le modèle)
 
     private JPopupMenu popupMenu = new JPopupMenu();
+    //TODO remplacer les différent menuSalde menuAnnanas par un seul listener
     private  JMenuItem menuSalade = new JMenuItem("Salade");
     private JMenuItem menuCarrotte = new JMenuItem("Carrotte");
 
@@ -444,8 +445,8 @@ public class VueControleurPotager extends JFrame implements Observer {
      */
     private void mettreAJourAffichage() {
         while(true) {
-            label_precipitation.setText(String.valueOf(simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations()));
-            label_temperature.setText(String.valueOf(simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()));
+            label_precipitation.setText(String.valueOf(simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations() + " %"));
+            label_temperature.setText(String.valueOf(simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement() + " °"));
 
             for (int x = 0; x < sizeX; x++) {
                 for (int y = 0; y < sizeY; y++) {

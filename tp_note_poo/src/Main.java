@@ -7,7 +7,6 @@ public class Main {
         SimulateurPotager simulateurPotager = new SimulateurPotager();
         //meteo
         SimulateurMeteo met = new SimulateurMeteo(simulateurPotager);
-        //
         VueControleurPotager vc = new VueControleurPotager(simulateurPotager);
         vc.setVisible(true);
         Ordonnanceur.getOrdonnanceur().addObserver(vc);

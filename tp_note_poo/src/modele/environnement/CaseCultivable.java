@@ -101,6 +101,7 @@ public class CaseCultivable extends Case {
 
     @Override
     public void run() {
+        // si un legume est sur une case on appelle nextStep de la class legume qui appel la fonction de croissance du legume
         if (legume != null) {
             legume.nextStep();
         }
