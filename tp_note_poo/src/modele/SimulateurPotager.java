@@ -145,6 +145,8 @@ public class SimulateurPotager {
         return map.get(p);
     }
 
+
+
     public boolean isCultivable(Case ca){
         if(ca instanceof CaseCultivable){
             return true;

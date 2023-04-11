@@ -55,7 +55,7 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
     private JMenuItem menuCarrotte = new JMenuItem("Carrotte");
 
     private JMenuItem menuCerise = new JMenuItem("Cerise");
-    private JMenuItem menuChamp = new JMenuItem("Champignon");
+    private JMenuItem menuChampignon = new JMenuItem("Champignon");
     private JMenuItem menuBanane = new JMenuItem("Banane");
     private JMenuItem menuTomate = new JMenuItem("Tomate");
     private JMenuItem menuPeche = new JMenuItem("Peche");
@@ -78,6 +78,10 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
     // verifier si on peut inserer un legume
     private boolean a_deja_legume;
 
+    private int x_actu;
+    private int y_actu;
+    private int nb_legume;
+
     public VueControleurPotager(SimulateurPotager _simulateurPotager) {
         sizeX = simulateurPotager.SIZE_X;
         sizeY = _simulateurPotager.SIZE_Y;
@@ -89,7 +93,7 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
         menuBanane.setIcon(icoBanane);
         menuCerise.setIcon(icoCerise);
         menuCarrotte.setIcon(icoCarrotte);
-        menuChamp.setIcon(icoChampignon);
+        menuChampignon.setIcon(icoChampignon);
         menuPeche.setIcon(icoPeche);
         menuTomate.setIcon(icoTomate);
         menuSalade.setIcon(icoSalade);
@@ -99,7 +103,7 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
         popupMenu.add(menuBanane);
         popupMenu.add(menuCarrotte);
         popupMenu.add(menuCerise);
-        popupMenu.add(menuChamp);
+        popupMenu.add(menuChampignon);
         popupMenu.add(menuPeche);
         popupMenu.add(menuSalade);
         popupMenu.add(menuTomate);
@@ -183,6 +187,7 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
             for (int x = 0; x < sizeX; x++) {
                 final int xx = x; // constantes utiles au fonctionnement de la classe anonyme
                 final int yy = y;
+
                 tabJLabel[x][y].addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
@@ -194,6 +199,8 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
                         // si la case est cultivable on affiche le menu d'option
                         if(simulateurPotager.isCultivable(caseGotten)) {
                             popupMenu.show(tabJLabel[xx][yy], e.getX(), e.getY());
+                            x_actu=xx;
+                            y_actu=yy;
                             // si il a deja un legume sur sur la case on peut pas planter
                             if(simulateurPotager.isPresentLegume((CaseCultivable) caseGotten)) {
                                 a_deja_legume=true;
@@ -211,6 +218,13 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
         }
         //on ajoute à chaque option du menu le même listener
         menuAnanas.addActionListener(menuListener);
+        menuBanane.addActionListener(menuListener);
+        menuCarrotte.addActionListener(menuListener);
+        menuCerise.addActionListener(menuListener);
+        menuChampignon.addActionListener(menuListener);
+        menuPeche.addActionListener(menuListener);
+        menuSalade.addActionListener(menuListener);
+        menuTomate.addActionListener(menuListener);
         menuRecolte.addActionListener(menuListener);
 
     }
@@ -221,17 +235,96 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
         public void actionPerformed(ActionEvent event) {
             if(event.getActionCommand()=="Ananas") {
                 if(!a_deja_legume) {
-                    System.out.println("annanas ["
-                            + event.getActionCommand() + "] was pressed.");
+                    System.out.println("on plante un Ananas ");
+                    simulateurPotager.actionUtilisateur(x_actu,y_actu,"ANANAS");
                 }
                 else {
                     System.out.println("il a deja un legume sur cette case");
                 }
             }
-        //action pour Récolter
+            // Action pour Banane
+            if(event.getActionCommand()=="Banane") {
+                if(!a_deja_legume) {
+                    System.out.println("on plante une Banane ");
+                    simulateurPotager.actionUtilisateur(x_actu,y_actu,"BANANE");
+                }
+                else {
+                    System.out.println("il a deja un legume sur cette case");
+                }
+            }
+            //Action pour Carrotte
+            if(event.getActionCommand()=="Carrotte") {
+                if(!a_deja_legume) {
+                    System.out.println("on plante une Carrotte ");
+                    simulateurPotager.actionUtilisateur(x_actu,y_actu,"CARROTTE");
+                }
+                else {
+                    System.out.println("il a deja un legume sur cette case");
+                }
+            }
+            //Action pour Cerise
+            if(event.getActionCommand()=="Cerise") {
+                if(!a_deja_legume) {
+                    System.out.println("on plante une Cerise ");
+                    simulateurPotager.actionUtilisateur(x_actu,y_actu,"CERISE");
+                }
+                else {
+                    System.out.println("il a deja un legume sur cette case");
+                }
+            }
+            // Action pour Champignon
+            if(event.getActionCommand()=="Champignon") {
+                if(!a_deja_legume) {
+                    System.out.println("on plante un Champignon ");
+                    simulateurPotager.actionUtilisateur(x_actu,y_actu,"CHAMPIGNON");
+                }
+                else {
+                    System.out.println("il a deja un legume sur cette case");
+                }
+            }
+            // Action pour Peche
+            if(event.getActionCommand()=="Peche") {
+                if(!a_deja_legume) {
+                    System.out.println("on plante une peche ");
+                    simulateurPotager.actionUtilisateur(x_actu,y_actu,"PECHE");
+                }
+                else {
+                    System.out.println("il a deja un legume sur cette case");
+                }
+            }
+            // Action pour salade
+            if(event.getActionCommand()=="Salade") {
+                if(!a_deja_legume) {
+                    System.out.println("on plante une salade ");
+                    simulateurPotager.actionUtilisateur(x_actu,y_actu,"SALADE");
+                }
+                else {
+                    System.out.println("il a deja un legume sur cette case");
+                }
+            }
+            //action pour tomate
+            if(event.getActionCommand()=="Tomate") {
+                if(!a_deja_legume) {
+                    System.out.println("on plante une tomate ");
+                    simulateurPotager.actionUtilisateur(x_actu,y_actu,"TOMATE");
+                }
+                else {
+                    System.out.println("il a deja un legume sur cette case");
+                }
+            }
+            //action pour Récolter
             if(event.getActionCommand()=="récolter") {
-                System.out.println("le legume a ete retire ["
-                        + event.getActionCommand() + "] was pressed.");
+                if(a_deja_legume) {// si il a un legume on peut le recolter
+                    Point point = new Point(x_actu,y_actu);
+                    Case case_actu = simulateurPotager.objetALaPosition(point);
+                    Legume leg = case_actu.getLegumeCaseCultivable();
+                    System.out.println("on récolte un " + leg.getVariete());
+                    simulateurPotager.actionUtilisateur(x_actu,y_actu,"TERRE");
+                }
+                else {
+                    System.out.println("il n'y a aucun legume à récolter");
+                }
+
             }
         }
     };

@@ -6,6 +6,7 @@
 package modele.environnement;
 
 import modele.SimulateurPotager;
+import modele.environnement.varietes.Legume;
 
 public abstract class Case implements Runnable {
     protected SimulateurPotager simulateurPotager;
@@ -35,6 +36,17 @@ public abstract class Case implements Runnable {
     }
 
     public abstract void actionUtilisateur();
+
+
+    //retourne le legume qui se trouve sur une case cultivable
+    public Legume getLegumeCaseCultivable() {
+        if(this instanceof CaseCultivable){
+            return ((CaseCultivable) this).getLegume();
+        }
+        else {
+            return null;
+        }
+    }
 
 
   }
