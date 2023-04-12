@@ -15,11 +15,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
+import modele.Ordonnanceur;
 import modele.SimulateurPotager;
 import modele.environnement.*;
 import modele.environnement.varietes.Legume;
-import modele.environnement.varietes.Varietes;
+
 
 
 /** Cette classe a deux fonctions :
@@ -27,7 +30,7 @@ import modele.environnement.varietes.Varietes;
  *  (2) Controleur : écouter les évènements clavier et déclencher le traitement adapté sur le modèle
  *
  */
-public class VueControleurPotager extends JFrame implements Observer {
+public class VueControleurPotager extends JFrame implements Observer, ChangeListener {
     private SimulateurPotager simulateurPotager; // référence sur une classe de modèle : permet d'accéder aux données du modèle pour le rafraichissement, permet de communiquer les actions clavier (ou souris)
 
     private int sizeX; // taille de la grille affichée
@@ -82,6 +85,9 @@ public class VueControleurPotager extends JFrame implements Observer {
     private int y_actu;
     private int nb_legume;
 
+    private JSlider slider;
+    private JLabel label;
+
     public VueControleurPotager(SimulateurPotager _simulateurPotager) {
         sizeX = simulateurPotager.SIZE_X;
         sizeY = _simulateurPotager.SIZE_Y;
@@ -109,6 +115,7 @@ public class VueControleurPotager extends JFrame implements Observer {
         popupMenu.add(menuTomate);
         popupMenu.add(menuRecolte);
         //ajouterEcouteurClavier(); // si besoin
+
 
 
     }
@@ -154,18 +161,32 @@ public class VueControleurPotager extends JFrame implements Observer {
         setSize(1100, 525);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // permet de terminer l'application à la fermeture de la fenêtre
         JPanel infos = new JPanel();
+        JPanel infos2 = new JPanel();
+
         // affichages des données de la météos début
         // todo afficher les données du simulateur météo
-        Point current = new Point(0,0);// on recupere la meteo
+
         infos.add(texte_precipitation);
         infos.add(valeur_precipitation);
         infos.add(texte_temperature);
         infos.add(valeur_temperature);
-        infos.add(texte_legume);
-
-        infos.add(texte_argent);
+      //  infos.add(texte_legume);
+        //infos2.add(texte_argent);
+        // le slider
+        label = new JLabel("Ralentissement");
+        // le slider
+        slider = new JSlider(JSlider.HORIZONTAL, 1, 10, 5);// le dernier argument est la position par défaut
+        slider.setMinorTickSpacing(1);
+        slider.setMajorTickSpacing(1);
+        slider.setPaintTicks(true);
+        slider.setPaintLabels(true);
+        slider.addChangeListener(this);
+        infos2.add(label);
+        infos2.add(slider);
         // affichages des données de la météos fin
         add(infos, BorderLayout.EAST);
+        add(infos2,BorderLayout.SOUTH);
+
 
 
 
@@ -470,6 +491,12 @@ public class VueControleurPotager extends JFrame implements Observer {
     }
 
 
+    // la gestion du slider quand on change la valeur
+    @Override
+    public void stateChanged(ChangeEvent e) {
+        System.out.println("on change la vitesse");
+        Ordonnanceur.getOrdonnanceur().setPause(slider.getValue()*1000);
+    }
 
 
 //fin de la class

@@ -22,6 +22,9 @@ public class Ordonnanceur extends Observable implements Runnable {
     }
 
 
+    public void setPause(long pause) {
+        this.pause = pause;
+    }
 
     private long pause;
     private Vector<Runnable> lst = new Vector<Runnable>(); // liste synchronisée
