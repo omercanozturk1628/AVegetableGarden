@@ -109,6 +109,8 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
         popupMenu.add(menuTomate);
         popupMenu.add(menuRecolte);
         //ajouterEcouteurClavier(); // si besoin
+
+
     }
     // affichages des données de la météos début
 
@@ -237,6 +239,8 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
                 if(!a_deja_legume) {
                     System.out.println("on plante un Ananas ");
                     simulateurPotager.actionUtilisateur(x_actu,y_actu,"ANANAS");
+                    // on met à jours l'affichage
+                    mettreAJourAffichage();
                 }
                 else {
                     System.out.println("il a deja un legume sur cette case");
@@ -337,8 +341,13 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
     /**
      * Il y a une grille du côté du modèle ( jeu.getGrille() ) et une grille du côté de la vue (tabJLabel)
      */
+    //TODO ajouter un argument qui change aussi la meteo ou pas
+    //
     private void mettreAJourAffichage() {
-        while(true) {
+        System.out.println("on met à jour l'affichage **************************************************");
+       // while(true) {
+            //on change la meteo
+            //this.simulateurPotager.getSimMet().run();
             valeur_precipitation.setText(String.valueOf(simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations() + " %"));
             valeur_temperature.setText(String.valueOf(simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement() + " °"));
 
@@ -393,20 +402,24 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
                     }
                 }
             }
-        }
+
+        //}
+
     }
 
+
+    // méthode appélées quand l'ordonanceur prévient d'un changement
     @Override
     public void update(Observable o, Object arg) {
-        mettreAJourAffichage();
-        /*
-        SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
+       mettreAJourAffichage();
+       // SwingUtilities.invokeLater(new Runnable() {
+                  //  @Override
+                /*    public void run() {
+                        System.out.println("MAJ de l'affichage *******************************************************");
                         mettreAJourAffichage();
-                    }
-                }); 
-        */
+                    }*/
+            //    });
+
 
     }
 

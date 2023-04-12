@@ -42,7 +42,7 @@ public class SimulateurPotager {
         Date interval_meteo = new Date();
         interval_meteo.setMinutes(0);
         interval_meteo.setSeconds(2);
-        simMet = new SimulateurMeteo(this,interval_meteo);
+        simMet = new SimulateurMeteo(this);
 
 
         simMet = new SimulateurMeteo(this);
@@ -55,8 +55,9 @@ public class SimulateurPotager {
         return grilleCases;
     }
     
+    //initialise la grille de départ
     private void initialisationDesEntites() {
-
+        System.out.println("on créer le potager ******************************************************");
         // murs extérieurs horizontaux
         for (int x = 0; x < 20; x++) {
             addEntite(new CaseNonCultivable(this), x, 0);
@@ -79,6 +80,7 @@ public class SimulateurPotager {
                 CaseCultivable cc = new CaseCultivable(this);
                 addEntite(cc , x, y);
                 if (rnd.nextBoolean()) {
+                    // pour les cases cultivable on peut planter ou non un legume au hazrd pendant l'initialisation
                     cc.actionUtilisateur();
                 }
                 Ordonnanceur.getOrdonnanceur().add(cc);
