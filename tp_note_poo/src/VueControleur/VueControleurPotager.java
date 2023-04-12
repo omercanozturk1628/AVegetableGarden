@@ -83,19 +83,19 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
 
     private int x_actu;
     private int y_actu;
-    private int nb_legume;
+    private int score;// sera augmenter quand on récolte un legume on fonction de la taille
 
     private JSlider slider;
     private JLabel label;
 
     private ArrayList<Color> couleur_grille = new ArrayList<Color>();
 
-    private int index_couleur_actu;
+    private int index_couleur_actu;//l' ensoleillement : 0 jour; 1 après midi ; 2 soir
 
     JComponent grilleJLabels;// la grille qui contient toutes les cases
 
     public VueControleurPotager(SimulateurPotager _simulateurPotager) {
-        // on ajoute les couleur du matin, après-midi et soir
+        // on ajoute les couleurs du matin, après-midi et soir
         index_couleur_actu=0;
         couleur_grille.add(new Color(135,206,235));//matin
         couleur_grille.add(new Color(255, 153, 0));//après-midi
@@ -126,31 +126,9 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
         popupMenu.add(menuSalade);
         popupMenu.add(menuTomate);
         popupMenu.add(menuRecolte);
-        //ajouterEcouteurClavier(); // si besoin
-
-
 
     }
-    // affichages des données de la météos début
 
-
-
-    // affichages des données de la météos fin
-/*
-    private void ajouterEcouteurClavier() {
-        addKeyListener(new KeyAdapter() { // new KeyAdapter() { ... } est une instance de classe anonyme, il s'agit d'un objet qui correspond au controleur dans MVC
-            @Override
-            public void keyPressed(KeyEvent e) {
-                switch(e.getKeyCode()) {  // on regarde quelle touche a été pressée
-                    case KeyEvent.VK_LEFT : Controle4Directions.getInstance().setDirectionCourante(Direction.gauche); break;
-                    case KeyEvent.VK_RIGHT : Controle4Directions.getInstance().setDirectionCourante(Direction.droite); break;
-                    case KeyEvent.VK_DOWN : Controle4Directions.getInstance().setDirectionCourante(Direction.bas); break;
-                    case KeyEvent.VK_UP : Controle4Directions.getInstance().setDirectionCourante(Direction.haut); break;
-                }
-            }
-        });
-    }
-*/
 
     private void chargerLesIcones() {
     	// image libre de droits utilisée pour les légumes : https://www.vecteezy.com/vector-art/2559196-bundle-of-fruits-and-vegetables-icons
@@ -172,21 +150,15 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
         setTitle("A vegetable garden");
         setSize(1100, 525);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // permet de terminer l'application à la fermeture de la fenêtre
-        JPanel infos = new JPanel();
-        JPanel infos2 = new JPanel();
-
-        // affichages des données de la météos début
-        // todo afficher les données du simulateur météo
-
+        JPanel infos = new JPanel();// info sur la météo
+        JPanel infos2 = new JPanel();//le panal du slide cursor
+        // on ajoute les info de la météo
         infos.add(texte_precipitation);
         infos.add(valeur_precipitation);
         infos.add(texte_temperature);
         infos.add(valeur_temperature);
-      //  infos.add(texte_legume);
-        //infos2.add(texte_argent);
         // le slider
         label = new JLabel("Ralentissement");
-        // le slider
         slider = new JSlider(JSlider.HORIZONTAL, 1, 10, 5);// le dernier argument est la position par défaut
         slider.setMinorTickSpacing(1);
         slider.setMajorTickSpacing(1);
@@ -195,14 +167,8 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
         slider.addChangeListener(this);
         infos2.add(label);
         infos2.add(slider);
-        // affichages des données de la météos fin
-        add(infos, BorderLayout.EAST);
-        add(infos2,BorderLayout.SOUTH);
-
-
-
-
-
+        add(infos, BorderLayout.EAST);// la météo
+        add(infos2,BorderLayout.SOUTH);// le slider
          grilleJLabels = new JPanel(new GridLayout(sizeY, sizeX)); // grilleJLabels va contenir les cases graphiques et les positionner sous la forme d'une grille
 
         tabJLabel = new JLabel[sizeX][sizeY];
@@ -246,7 +212,6 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                             }
 
                         }
-
                     }
                 });
             }
@@ -261,7 +226,6 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
         menuSalade.addActionListener(menuListener);
         menuTomate.addActionListener(menuListener);
         menuRecolte.addActionListener(menuListener);
-
     }
 
 //les traitements des différentes option du menu déroulant
@@ -395,8 +359,6 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     //
     private void mettreAJourAffichage() {
         System.out.println("on met à jour l'affichage **************************************************");
-
-
             //on met à jour l'affichage de la météo
             valeur_precipitation.setText(String.valueOf(simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations() + " %"));
             valeur_temperature.setText(String.valueOf(simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement() + " °"));
@@ -440,7 +402,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                         } else {
                             tabJLabel[x][y].setIcon(icoTerre);
                         }
-
+                        //TODO se renseigner sur ça
                         // si transparence : images avec canal alpha + dessins manuels (voir ci-dessous + créer composant qui redéfinie paint(Graphics g)), se documenter
                         //BufferedImage bi = getImage("Images/smick.png", 0, 0, 20, 20);
                         //tabJLabel[x][y].getGraphics().drawImage(bi, 0, 0, null);
@@ -477,15 +439,12 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     // chargement de l'image entière comme icone
     private ImageIcon chargerIcone(String urlIcone) {
         BufferedImage image = null;
-
         try {
             image = ImageIO.read(new File(urlIcone));
         } catch (IOException ex) {
             Logger.getLogger(VueControleurPotager.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
-
-
         return new ImageIcon(image);
     }
 
@@ -520,5 +479,5 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     }
 
 
-//fin de la class
+
 }

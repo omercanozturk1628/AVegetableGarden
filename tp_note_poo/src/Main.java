@@ -12,9 +12,5 @@ public class Main {
         Ordonnanceur.getOrdonnanceur().addObserver(vc);
         // 1 seconde = 1000  millisecondes la vitesse de simulation du potager
         Ordonnanceur.getOrdonnanceur().start(5000);
-
-
-
-
     }
 }
