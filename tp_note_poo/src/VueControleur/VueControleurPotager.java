@@ -27,7 +27,7 @@ import modele.environnement.varietes.Varietes;
  *  (2) Controleur : écouter les évènements clavier et déclencher le traitement adapté sur le modèle
  *
  */
-public class VueControleurPotager extends JFrame implements Observer,ActionListener {
+public class VueControleurPotager extends JFrame implements Observer {
     private SimulateurPotager simulateurPotager; // référence sur une classe de modèle : permet d'accéder aux données du modèle pour le rafraichissement, permet de communiquer les actions clavier (ou souris)
 
     private int sizeX; // taille de la grille affichée
@@ -234,7 +234,8 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
 //les traitements des différentes option du menu déroulant
     ActionListener menuListener = new ActionListener() {
     //action pour Ananas
-        public void actionPerformed(ActionEvent event) {
+    @Override
+    public void actionPerformed(ActionEvent event) {
             if(event.getActionCommand()=="Ananas") {
                 if(!a_deja_legume) {
                     System.out.println("on plante un Ananas ");
@@ -243,7 +244,7 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
                     mettreAJourAffichage();
                 }
                 else {
-                    System.out.println("il a deja un legume sur cette case");
+                    JOptionPane.showMessageDialog(popupMenu,"Il y a deja un legume!");
                 }
             }
             // Action pour Banane
@@ -251,9 +252,11 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
                 if(!a_deja_legume) {
                     System.out.println("on plante une Banane ");
                     simulateurPotager.actionUtilisateur(x_actu,y_actu,"BANANE");
+                    // on met à jours l'affichage
+                    mettreAJourAffichage();
                 }
                 else {
-                    System.out.println("il a deja un legume sur cette case");
+                    JOptionPane.showMessageDialog(popupMenu,"Il y a deja un legume!");
                 }
             }
             //Action pour Carrotte
@@ -261,9 +264,11 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
                 if(!a_deja_legume) {
                     System.out.println("on plante une Carrotte ");
                     simulateurPotager.actionUtilisateur(x_actu,y_actu,"CARROTTE");
+                    // on met à jours l'affichage
+                    mettreAJourAffichage();
                 }
                 else {
-                    System.out.println("il a deja un legume sur cette case");
+                    JOptionPane.showMessageDialog(popupMenu,"Il y a deja un legume!");
                 }
             }
             //Action pour Cerise
@@ -271,9 +276,11 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
                 if(!a_deja_legume) {
                     System.out.println("on plante une Cerise ");
                     simulateurPotager.actionUtilisateur(x_actu,y_actu,"CERISE");
+                    // on met à jours l'affichage
+                    mettreAJourAffichage();
                 }
                 else {
-                    System.out.println("il a deja un legume sur cette case");
+                    JOptionPane.showMessageDialog(popupMenu,"Il y a deja un legume!");
                 }
             }
             // Action pour Champignon
@@ -281,9 +288,11 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
                 if(!a_deja_legume) {
                     System.out.println("on plante un Champignon ");
                     simulateurPotager.actionUtilisateur(x_actu,y_actu,"CHAMPIGNON");
+                    // on met à jours l'affichage
+                    mettreAJourAffichage();
                 }
                 else {
-                    System.out.println("il a deja un legume sur cette case");
+                    JOptionPane.showMessageDialog(popupMenu,"Il y a deja un legume!");
                 }
             }
             // Action pour Peche
@@ -291,9 +300,11 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
                 if(!a_deja_legume) {
                     System.out.println("on plante une peche ");
                     simulateurPotager.actionUtilisateur(x_actu,y_actu,"PECHE");
+                    // on met à jours l'affichage
+                    mettreAJourAffichage();
                 }
                 else {
-                    System.out.println("il a deja un legume sur cette case");
+                    JOptionPane.showMessageDialog(popupMenu,"Il y a deja un legume!");
                 }
             }
             // Action pour salade
@@ -301,9 +312,11 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
                 if(!a_deja_legume) {
                     System.out.println("on plante une salade ");
                     simulateurPotager.actionUtilisateur(x_actu,y_actu,"SALADE");
+                    // on met à jours l'affichage
+                    mettreAJourAffichage();
                 }
                 else {
-                    System.out.println("il a deja un legume sur cette case");
+                    JOptionPane.showMessageDialog(popupMenu,"Il y a deja un legume!");
                 }
             }
             //action pour tomate
@@ -311,9 +324,11 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
                 if(!a_deja_legume) {
                     System.out.println("on plante une tomate ");
                     simulateurPotager.actionUtilisateur(x_actu,y_actu,"TOMATE");
+                    // on met à jours l'affichage
+                    mettreAJourAffichage();
                 }
                 else {
-                    System.out.println("il a deja un legume sur cette case");
+                    JOptionPane.showMessageDialog(popupMenu,"Il y a deja un legume!");
                 }
             }
             //action pour Récolter
@@ -324,9 +339,11 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
                     Legume leg = case_actu.getLegumeCaseCultivable();
                     System.out.println("on récolte un " + leg.getVariete());
                     simulateurPotager.actionUtilisateur(x_actu,y_actu,"TERRE");
+                    // on met à jours l'affichage
+                    mettreAJourAffichage();
                 }
                 else {
-                    System.out.println("il n'y a aucun legume à récolter");
+                    JOptionPane.showMessageDialog(popupMenu,"il n'y a aucun legume à récolter");
                 }
 
             }
@@ -412,15 +429,6 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
     @Override
     public void update(Observable o, Object arg) {
        mettreAJourAffichage();
-       // SwingUtilities.invokeLater(new Runnable() {
-                  //  @Override
-                /*    public void run() {
-                        System.out.println("MAJ de l'affichage *******************************************************");
-                        mettreAJourAffichage();
-                    }*/
-            //    });
-
-
     }
 
 
@@ -461,27 +469,7 @@ public class VueControleurPotager extends JFrame implements Observer,ActionListe
         return bi;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        /*
-        Point point = new Point(xx,yy);
-        Case caseGotten = simulateurPotager.objetALaPosition(point);
-        // if(!pointArrayList.contains(point)){//si
-        if(simulateurPotager.isCultivable(caseGotten)){//
-            if(simulateurPotager.isPresentLegume((CaseCultivable) caseGotten)){
-                JOptionPane.showMessageDialog(popupMenu,"Il y a deja un legume!");
-            }
-            else{
-                simulateurPotager.actionUtilisateur(xx,yy,"ANANAS");
-                JOptionPane.showMessageDialog(popupMenu,"Un ananas est potagé");
-                pointArrayList.add(point);
 
-
-            }
-        }
-
-    }*/
-    }
 
 
 //fin de la class
