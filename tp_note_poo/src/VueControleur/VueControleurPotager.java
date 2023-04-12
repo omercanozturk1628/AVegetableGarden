@@ -88,7 +88,19 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     private JSlider slider;
     private JLabel label;
 
+    private ArrayList<Color> couleur_grille = new ArrayList<Color>();
+
+    private int index_couleur_actu;
+
+    JComponent grilleJLabels;// la grille qui contient toutes les cases
+
     public VueControleurPotager(SimulateurPotager _simulateurPotager) {
+        // on ajoute les couleur du matin, après-midi et soir
+        index_couleur_actu=0;
+        couleur_grille.add(new Color(135,206,235));//matin
+        couleur_grille.add(new Color(255, 153, 0));//après-midi
+        couleur_grille.add(new Color( 0, 51, 102));//soir
+
         sizeX = simulateurPotager.SIZE_X;
         sizeY = _simulateurPotager.SIZE_Y;
         simulateurPotager = _simulateurPotager;
@@ -191,7 +203,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
 
 
 
-        JComponent grilleJLabels = new JPanel(new GridLayout(sizeY, sizeX)); // grilleJLabels va contenir les cases graphiques et les positionner sous la forme d'une grille
+         grilleJLabels = new JPanel(new GridLayout(sizeY, sizeX)); // grilleJLabels va contenir les cases graphiques et les positionner sous la forme d'une grille
 
         tabJLabel = new JLabel[sizeX][sizeY];
 
@@ -383,9 +395,9 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     //
     private void mettreAJourAffichage() {
         System.out.println("on met à jour l'affichage **************************************************");
-       // while(true) {
-            //on change la meteo
-            //this.simulateurPotager.getSimMet().run();
+
+
+            //on met à jour l'affichage de la météo
             valeur_precipitation.setText(String.valueOf(simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations() + " %"));
             valeur_temperature.setText(String.valueOf(simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement() + " °"));
 
@@ -449,6 +461,15 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     // méthode appélées quand l'ordonanceur prévient d'un changement
     @Override
     public void update(Observable o, Object arg) {
+        // couleur arrière plan de la grille
+        grilleJLabels.setBackground(couleur_grille.get(index_couleur_actu));
+        // on avance le cycle jour nuit
+        if(index_couleur_actu==2) {
+            index_couleur_actu=0;
+        }
+        else {
+            index_couleur_actu++;
+        }
        mettreAJourAffichage();
     }
 
@@ -494,7 +515,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     // la gestion du slider quand on change la valeur
     @Override
     public void stateChanged(ChangeEvent e) {
-        System.out.println("on change la vitesse");
+        System.out.println("on change la vitesse de ralentissement");
         Ordonnanceur.getOrdonnanceur().setPause(slider.getValue()*1000);
     }
 
