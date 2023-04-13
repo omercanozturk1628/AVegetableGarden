@@ -368,7 +368,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
      */
     //TODO ajouter un argument qui change aussi la meteo ou pas
     //
-    private void mettreAJourAffichage() {//todo la croissance
+    private void mettreAJourAffichage() {//todo ajouter meteo à croissance
         System.out.println("on met à jour l'affichage **************************************************");
             //on met à jour l'affichage de la météo
             valeur_precipitation.setText(String.valueOf(simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations() + " %"));
@@ -385,7 +385,11 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
 
                             switch (legume.getVariete()) {
                                 case CARROTTE:
-                                    tabJLabel[x][y].setIcon(icoCarrotte);
+                                    //on recupere la taille de base du legume si sa resistance est à 0 on le détruit
+                                    tabJLabel[x][y].setIcon(chargerIcone("Images/data.png", 395,391,legume.getSize(), legume.getSize()));
+                                    if(legume.getResistance()<0) {
+                                        simulateurPotager.actionUtilisateur(x,y,"TERRE");
+                                    }
                                     break;
                                 case SALADE:
                                     tabJLabel[x][y].setIcon(icoSalade);
@@ -401,12 +405,18 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                                     tabJLabel[x][y].setIcon(icoPeche);
                                     break;
                                 case BANANE:
-                                    tabJLabel[x][y].setIcon(icoBanane);
+                                    //on recupere la taille de base du legume si sa resistance est à 0 on le détruit
+                                    tabJLabel[x][y].setIcon(chargerIcone("Images/data.png", 1951, 1169, legume.getSize(), legume.getSize()));
+                                    if(legume.getResistance()<0) {
+                                        simulateurPotager.actionUtilisateur(x,y,"TERRE");
+                                    }
                                     break;
                                 case ANANAS:
                                     //on recupere la taille de base du legume si sa resistance est à 0 on le détruit
                                     tabJLabel[x][y].setIcon(chargerIcone("Images/data.png", 2374, 781, legume.getSize(), legume.getSize()));
-                                    //if(legume.)
+                                    if(legume.getResistance()<0) {
+                                        simulateurPotager.actionUtilisateur(x,y,"TERRE");
+                                    }
                                     break;
                                 case CERISE:
                                     tabJLabel[x][y].setIcon(icoCerise);
@@ -416,10 +426,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                         } else {
                             tabJLabel[x][y].setIcon(icoTerre);
                         }
-                        //TODO se renseigner sur ça
-                        // si transparence : images avec canal alpha + dessins manuels (voir ci-dessous + créer composant qui redéfinie paint(Graphics g)), se documenter
-                        //BufferedImage bi = getImage("Images/smick.png", 0, 0, 20, 20);
-                        //tabJLabel[x][y].getGraphics().drawImage(bi, 0, 0, null);
+
                     } else if (simulateurPotager.getPlateau()[x][y] instanceof CaseNonCultivable) {
                         tabJLabel[x][y].setIcon(icoMur);
                     } else {
