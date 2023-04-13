@@ -78,6 +78,9 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     JLabel texte_legume = new JLabel("Legumes: ");
     JLabel texte_argent = new JLabel("Argent: ");
 
+    JLabel texte_score = new JLabel("Score: ");
+    JLabel valeur_score = new JLabel();
+
     // verifier si on peut inserer un legume
     private boolean a_deja_legume;
 
@@ -152,6 +155,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // permet de terminer l'application à la fermeture de la fenêtre
         JPanel infos = new JPanel();// info sur la météo
         JPanel infos2 = new JPanel();//le panal du slide cursor
+        JPanel infos3 = new JPanel();//le score du joueur
         // on ajoute les info de la météo
         infos.add(texte_precipitation);
         infos.add(valeur_precipitation);
@@ -169,6 +173,13 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
         infos2.add(slider);
         add(infos, BorderLayout.EAST);// la météo
         add(infos2,BorderLayout.SOUTH);// le slider
+        infos3.add(texte_score);// le score
+        valeur_score.setText("Score tmp");
+        infos3.add(valeur_score);
+        float police_score=20.0f;
+        texte_score.setFont(texte_score.getFont().deriveFont(police_score));
+        valeur_score.setFont(texte_score.getFont().deriveFont(police_score));
+        add(infos3,BorderLayout.NORTH);
          grilleJLabels = new JPanel(new GridLayout(sizeY, sizeX)); // grilleJLabels va contenir les cases graphiques et les positionner sous la forme d'une grille
 
         tabJLabel = new JLabel[sizeX][sizeY];
@@ -357,7 +368,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
      */
     //TODO ajouter un argument qui change aussi la meteo ou pas
     //
-    private void mettreAJourAffichage() {
+    private void mettreAJourAffichage() {//todo la croissance
         System.out.println("on met à jour l'affichage **************************************************");
             //on met à jour l'affichage de la météo
             valeur_precipitation.setText(String.valueOf(simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations() + " %"));
@@ -365,6 +376,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
 
             for (int x = 0; x < sizeX; x++) {
                 for (int y = 0; y < sizeY; y++) {
+                    // on met à jour la taille de chaque legume
                     if (simulateurPotager.getPlateau()[x][y] instanceof CaseCultivable) { // si la grille du modèle contient un Pacman, on associe l'icône Pacman du côté de la vue
 
                         Legume legume = ((CaseCultivable) simulateurPotager.getPlateau()[x][y]).getLegume();
@@ -392,7 +404,9 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                                     tabJLabel[x][y].setIcon(icoBanane);
                                     break;
                                 case ANANAS:
-                                    tabJLabel[x][y].setIcon(icoAnanas);
+                                    //on recupere la taille de base du legume si sa resistance est à 0 on le détruit
+                                    tabJLabel[x][y].setIcon(chargerIcone("Images/data.png", 2374, 781, legume.getSize(), legume.getSize()));
+                                    //if(legume.)
                                     break;
                                 case CERISE:
                                     tabJLabel[x][y].setIcon(icoCerise);

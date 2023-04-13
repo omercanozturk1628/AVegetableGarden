@@ -8,6 +8,11 @@ public class Carrotte extends Legume {
     }
 
     @Override
+    public int getSize() {
+        return 0;
+    }
+
+    @Override
     protected void croissance() {
         // TODO
         System.out.println("une carrotte est pousse!");

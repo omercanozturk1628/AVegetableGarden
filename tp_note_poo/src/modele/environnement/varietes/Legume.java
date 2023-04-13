@@ -5,6 +5,7 @@ public abstract class Legume {
     public void nextStep() {
         croissance();
     }
-
+    public abstract int getSize();
     protected abstract void croissance(); // définir selon les conditions
+
 }

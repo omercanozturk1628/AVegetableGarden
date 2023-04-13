@@ -7,6 +7,11 @@ public class Salade extends Legume {
     }
 
     @Override
+    public int getSize() {
+        return 0;
+    }
+
+    @Override
     protected void croissance() {
         // TODO
         // idéé retourne une vitesse de croissance
