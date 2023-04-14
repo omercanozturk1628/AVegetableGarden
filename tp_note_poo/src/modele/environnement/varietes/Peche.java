@@ -7,7 +7,7 @@ public class Peche extends Legume {
     private int score;// le score que rapporte un legume quand on le recolte
     public Peche() {
         size=40;// taille de base du legume sur la grille
-        speed_growth=10;// à chaque maj la taille augmentera de 10
+        speed_growth=22;// à chaque maj la taille augmentera de 10
         resistance=9;
         score=1;
     }

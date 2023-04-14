@@ -267,6 +267,38 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                         + " température favorable 8° - 29° " +
                         "humidité favorable 60% - 80% "
                         +"résistance: 6 "
+                        + "\n"
+                        + "\n"
+                        + "Cerise : "
+                        + "Score : 8 "
+                        + "vitesse de croissance de base : 10"
+                        + " température favorable 18° - 20° " +
+                        "humidité favorable 60% - 80% "
+                        +"résistance: 1 "
+                        + "\n"
+                        + "\n"
+                        + "Pêche : "
+                        + "Score : 1 "
+                        + "vitesse de croissance de base : 22"
+                        + " température favorable 10° - 30° " +
+                        "humidité favorable 60% - 80% "
+                        +"résistance: 9 "
+                        + "\n"
+                        + "\n"
+                        + "Salade : "
+                        + "Score : 2 "
+                        + "vitesse de croissance de base : 20"
+                        + " température favorable 18° - 20° " +
+                        "humidité favorable 60% - 80% "
+                        +"résistance: 8 "
+                        + "\n"
+                        + "\n"
+                        + "Tomate : "
+                        + "Score : 1 "
+                        + "vitesse de croissance de base : 10"
+                        + " température favorable 18° - 27° " +
+                        "humidité favorable 60% - 80% "
+                        +"résistance: 12 "
                         + "\n");
             }
         });
