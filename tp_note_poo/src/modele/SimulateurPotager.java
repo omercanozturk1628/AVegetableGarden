@@ -104,10 +104,7 @@ public class SimulateurPotager {
                 Legume l = ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("CERISE");
                 return l;
             }
-            else if(type.equals("CHAMPIGNON")){
-                Legume l = ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("CHAMPIGNON");
-                return l;
-            }
+
             else if(type.equals("TOMATE")){
                 Legume l = ((CaseCultivable) grilleCases[x][y]).actionLegumePotager("TOMATE");
                 return l;

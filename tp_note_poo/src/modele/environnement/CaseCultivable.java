@@ -21,7 +21,6 @@ public class CaseCultivable extends Case {
         liste_variete_possible.add("Banane");
         liste_variete_possible.add("Carrote");
         liste_variete_possible.add("Cerise");
-        liste_variete_possible.add("Champignon");
         liste_variete_possible.add("Peche");
         liste_variete_possible.add("Salade");
         liste_variete_possible.add("Tomate");
@@ -47,9 +46,7 @@ public class CaseCultivable extends Case {
             else if (legume_aleatoire=="Cerise" ){
                 legume = new Cerise();
             }
-            else if (legume_aleatoire=="Champignon" ){
-                legume = new Champignon();
-            }
+
             else if (legume_aleatoire=="Peche" ){
                 legume = new Peche();
             }
@@ -74,9 +71,7 @@ public class CaseCultivable extends Case {
         else if(type.equals("CERISE")){
             legume = new Cerise();
         }
-        else if(type.equals("CHAMPIGNON")){
-            legume = new Champignon();
-        }
+
         else if(type.equals("TOMATE")){
             legume = new Tomate();
         }

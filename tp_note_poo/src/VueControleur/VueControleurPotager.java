@@ -60,11 +60,8 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     private ImageIcon icoCerise4;
     private ImageIcon icoCerise5;
 
-    private ImageIcon icoChampignon;
-    private ImageIcon icoChampignon2;
-    private ImageIcon icoChampignon3;
-    private ImageIcon icoChampignon4;
-    private ImageIcon icoChampignon5;
+
+
     private ImageIcon icoPeche;
     private ImageIcon icoPeche2;
     private ImageIcon icoPeche3;
@@ -96,7 +93,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     private JMenuItem menuCarrotte = new JMenuItem("Carrotte");
 
     private JMenuItem menuCerise = new JMenuItem("Cerise");
-    private JMenuItem menuChampignon = new JMenuItem("Champignon");
+
     private JMenuItem menuBanane = new JMenuItem("Banane");
     private JMenuItem menuTomate = new JMenuItem("Tomate");
     private JMenuItem menuPeche = new JMenuItem("Peche");
@@ -148,21 +145,21 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
 
         chargerLesIcones();
         placerLesComposantsGraphiques();
-        menuAnanas.setIcon(icoAnanas);
-        menuBanane.setIcon(icoBanane);
-        menuCerise.setIcon(icoCerise);
-        menuCarrotte.setIcon(icoCarrotte);
-        menuChampignon.setIcon(icoChampignon);
-        menuPeche.setIcon(icoPeche);
-        menuTomate.setIcon(icoTomate);
-        menuSalade.setIcon(icoSalade);
+        menuAnanas.setIcon(icoAnanas5);
+        menuBanane.setIcon(icoBanane5);
+        menuCerise.setIcon(icoCerise5);
+        menuCarrotte.setIcon(icoCarrotte5);
+
+        menuPeche.setIcon(icoPeche5);
+        menuTomate.setIcon(icoTomate5);
+        menuSalade.setIcon(icoSalade5);
         menuRecolte.setIcon(IcoRecolte);
 
         popupMenu.add(menuAnanas);
         popupMenu.add(menuBanane);
         popupMenu.add(menuCarrotte);
         popupMenu.add(menuCerise);
-        popupMenu.add(menuChampignon);
+
         popupMenu.add(menuPeche);
         popupMenu.add(menuSalade);
         popupMenu.add(menuTomate);
@@ -193,11 +190,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
         icoSalade5 = chargerIcone("Images/data.png", 0, 0, 120, 120);
 
 
-        icoChampignon = chargerIcone("Images/data.png", 396, 0, 40, 40);
-        icoChampignon2 = chargerIcone("Images/data.png", 396, 0, 60, 60);
-        icoChampignon3 = chargerIcone("Images/data.png", 396, 0, 80, 80);
-        icoChampignon4 = chargerIcone("Images/data.png", 396, 0, 100, 100);
-        icoChampignon5 = chargerIcone("Images/data.png", 396, 0, 120, 120);
+
 
 
         icoTomate = chargerIcone("Images/data.png", 3121, 1169, 40, 40);
@@ -318,7 +311,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
         menuBanane.addActionListener(menuListener);
         menuCarrotte.addActionListener(menuListener);
         menuCerise.addActionListener(menuListener);
-        menuChampignon.addActionListener(menuListener);
+
         menuPeche.addActionListener(menuListener);
         menuSalade.addActionListener(menuListener);
         menuTomate.addActionListener(menuListener);
@@ -377,18 +370,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                     JOptionPane.showMessageDialog(popupMenu,"Il y a deja un legume!");
                 }
             }
-            // Action pour Champignon
-            if(event.getActionCommand()=="Champignon") {
-                if(!a_deja_legume) {
-                    System.out.println("on plante un Champignon ");
-                    simulateurPotager.actionUtilisateur(x_actu,y_actu,"CHAMPIGNON");
-                    // on met à jours l'affichage
-                    mettreAJourAffichage();
-                }
-                else {
-                    JOptionPane.showMessageDialog(popupMenu,"Il y a deja un legume!");
-                }
-            }
+
             // Action pour Peche
             if(event.getActionCommand()=="Peche") {
                 if(!a_deja_legume) {
@@ -480,9 +462,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                                 case TOMATE:
                                     tabJLabel[x][y].setIcon(icoTomate);
                                     break;
-                                case CHAMPIGNON:
-                                    tabJLabel[x][y].setIcon(icoChampignon);
-                                    break;
+
                                 case PECHE:
                                     tabJLabel[x][y].setIcon(icoPeche);
                                     break;
