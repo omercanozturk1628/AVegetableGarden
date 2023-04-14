@@ -171,6 +171,11 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     private void chargerLesIcones() {
     	// image libre de droits utilisée pour les légumes : https://www.vecteezy.com/vector-art/2559196-bundle-of-fruits-and-vegetables-icons
 
+        icoVide = chargerIcone("Images/Vide.png");
+        icoMur = chargerIcone("Images/Mur.png");
+        icoTerre = chargerIcone("Images/Terre.png");
+        IcoRecolte = chargerIcone("Images/Terre.png");
+
         icoAnanas = chargerIcone("Images/data.png", 2374, 781, 40, 40);
         icoAnanas2 = chargerIcone("Images/data.png", 2374, 781, 60, 60);
         icoAnanas3 = chargerIcone("Images/data.png", 2374, 781, 80, 80);
@@ -203,7 +208,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
         icoCerise = chargerIcone("Images/data.png", 1953, 789, 40, 40);
         icoCerise2 = chargerIcone("Images/data.png", 1953, 789, 60, 60);
         icoCerise3 = chargerIcone("Images/data.png", 1953, 789, 80, 80);
-        icoCerise4 = chargerIcone("Images/data.png", 1953, 789, 100,100 );
+        icoCerise4 = chargerIcone("Images/data.png", 1950, 789, 100,100 );// erreur
         icoCerise5 = chargerIcone("Images/data.png", 1953, 789, 120, 120);
 
 
@@ -214,7 +219,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
         icoPeche5 = chargerIcone("Images/data.png", 1169, 1192, 120, 120);
 
 
-        icoCarrotte = chargerIcone("Images/data.png",395,391,40,40);
+        icoCarrotte = chargerIcone("Images/data.png",390,391,40,40);// erreur
         icoCarrotte2 = chargerIcone("Images/data.png",395,391,60,60);
         icoCarrotte3 = chargerIcone("Images/data.png",395,391,80,80);
         icoCarrotte4 = chargerIcone("Images/data.png",395,391,100,100);
@@ -222,10 +227,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
 
 
 
-        icoVide = chargerIcone("Images/Vide.png");
-        icoMur = chargerIcone("Images/Mur.png");
-        icoTerre = chargerIcone("Images/Terre.png");
-        IcoRecolte = chargerIcone("Images/main.svg.png");
+
     }
 
     private void placerLesComposantsGraphiques() {
