@@ -5,6 +5,7 @@ public abstract class Legume {
     public void nextStep() {
         croissance();
     }
+    public abstract int getScore();
     public abstract int getSize();
     public abstract void setSize(int size);
     public abstract int getSpeed_growth();

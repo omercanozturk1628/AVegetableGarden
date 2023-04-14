@@ -12,7 +12,7 @@ public class SimulateurMeteo implements Runnable {
 
     @Override
     public void run() {
-        // TODO
+
         int min_precipitations=0;
         int max_precipitations=100;
         int min_ensolleillement=-1;

@@ -5,10 +5,21 @@ public class Ananas extends Legume {
     private int speed_growth;//vitesse de croissance du legume
     private int resistance;// une fois que le legume a finis de atteint sa taille taille max il disparaitra après un temps
 
+
+
+    private int score;// le score que rapporte un legume quand on le recolte
+
     public Ananas() {
         size=30;// taille de base du legume sur la grille
         speed_growth=10;// à chaque maj la taille augmentera de 10
         resistance=4;
+        score=2;
+
+    }
+
+    @Override
+    public int getScore() {
+        return score;
     }
     @Override
     public Varietes getVariete() {

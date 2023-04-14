@@ -88,7 +88,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     private JLabel[][] tabJLabel;// cases graphique (au moment du rafraichissement, chaque case va être associée à une icône, suivant ce qui est présent dans le modèle)
 
     private JPopupMenu popupMenu = new JPopupMenu();
-    //TODO remplacer les différent menuSalde menuAnnanas par un seul listener
+
     private  JMenuItem menuSalade = new JMenuItem("Salade");
     private JMenuItem menuCarrotte = new JMenuItem("Carrotte");
 
@@ -121,7 +121,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
 
     private int x_actu;
     private int y_actu;
-    private int score;// sera augmenter quand on récolte un legume on fonction de la taille
+    private int score_general;// sera augmenter quand on récolte un legume on fonction de la taille
 
     private JSlider slider;
     private JLabel label;
@@ -436,9 +436,8 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     /**
      * Il y a une grille du côté du modèle ( jeu.getGrille() ) et une grille du côté de la vue (tabJLabel)
      */
-    //TODO ajouter un argument qui change aussi la meteo ou pas
-    //
-    private void mettreAJourAffichage() {//todo ajouter meteo à croissance
+
+    private void mettreAJourAffichage() {
         System.out.println("on met à jour l'affichage **************************************************");
             //on met à jour l'affichage de la météo
             valeur_precipitation.setText(String.valueOf(simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations() + " %"));

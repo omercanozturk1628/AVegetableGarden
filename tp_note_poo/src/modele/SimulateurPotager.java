@@ -74,7 +74,7 @@ public class SimulateurPotager {
         //addEntite(new CaseNonCultivable(this), 3, 6);
 
         Random rnd = new Random();
-// TODO défini taille
+
         for (int x = 1; x < SIZE_X-1; x++) {
             for (int y = 1; y < SIZE_Y-1; y++) {
                 CaseCultivable cc = new CaseCultivable(this);

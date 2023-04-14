@@ -9,11 +9,11 @@ public class CaseNonCultivable extends Case {
 
     @Override
     public void actionUtilisateur() {
-        // TODO
+
     }
 
     @Override
     public void run() {
-        // TODO
+
     }
 }

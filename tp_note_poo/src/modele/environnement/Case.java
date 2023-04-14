@@ -27,7 +27,7 @@ public abstract class Case implements Runnable {
         return ensolleillement;
     }
 
-    private int précipitations; // TODO : mis à jour par le simulateur de météo pour chaque case ()
+    private int précipitations;
     private int ensolleillement;
 
     
