@@ -185,7 +185,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
         icoBanane = chargerIcone("Images/data.png", 1951, 1169, 40, 40);
         icoBanane2 = chargerIcone("Images/data.png", 1951, 1169, 60, 60);
         icoBanane3 = chargerIcone("Images/data.png", 1951, 1169, 80, 80);
-        icoBanane4 = chargerIcone("Images/data.png", 1951, 1169, 100, 100);
+        icoBanane4 = chargerIcone("Images/data.png", 1951, 1170, 100, 100);
         icoBanane5 = chargerIcone("Images/data.png", 1951, 1169, 100, 100);
 
         icoSalade = chargerIcone("Images/data.png", 0, 0, 40, 40);
@@ -208,8 +208,8 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
         icoCerise = chargerIcone("Images/data.png", 1953, 789, 40, 40);
         icoCerise2 = chargerIcone("Images/data.png", 1953, 789, 60, 60);
         icoCerise3 = chargerIcone("Images/data.png", 1953, 789, 80, 80);
-        icoCerise4 = chargerIcone("Images/data.png", 1950, 789, 100,100 );// erreur
-        icoCerise5 = chargerIcone("Images/data.png", 1953, 789, 120, 120);
+        icoCerise4 = chargerIcone("Images/data.png", 1950, 789, 100,100 );// erreur corrigée en debug
+        icoCerise5 = chargerIcone("Images/data.png", 1953, 783, 120, 120);
 
 
         icoPeche = chargerIcone("Images/data.png", 1169, 1192, 40, 40);
@@ -219,11 +219,11 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
         icoPeche5 = chargerIcone("Images/data.png", 1169, 1192, 120, 120);
 
 
-        icoCarrotte = chargerIcone("Images/data.png",390,391,40,40);// erreur
-        icoCarrotte2 = chargerIcone("Images/data.png",395,391,60,60);
-        icoCarrotte3 = chargerIcone("Images/data.png",395,391,80,80);
-        icoCarrotte4 = chargerIcone("Images/data.png",395,391,100,100);
-        icoCarrotte5 = chargerIcone("Images/data.png",395,391,120,120);
+        icoCarrotte = chargerIcone("Images/data.png",395,395,40,40);// erreur corrigée en debug
+        icoCarrotte2 = chargerIcone("Images/data.png",395,395,60,60);
+        icoCarrotte3 = chargerIcone("Images/data.png",395,395,80,80);
+        icoCarrotte4 = chargerIcone("Images/data.png",395,395,100,100);
+        icoCarrotte5 = chargerIcone("Images/data.png",395,395,120,120);
 
 
 
@@ -451,6 +451,8 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
 
                         Legume legume = ((CaseCultivable) simulateurPotager.getPlateau()[x][y]).getLegume();
 
+
+
                         if (legume != null) {
 
                             switch (legume.getVariete()) {
@@ -508,6 +510,22 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                                     break;
 
                                 case TOMATE:
+                                    // on fait varier la vitesse de croissance en fonction de la météo pour tomate
+                                    // humidité 60 80
+                                    if(simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations()>=60 && simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations()<=80 ) {
+                                        legume.setSpeed_growth(legume.getSpeed_growth()+10);
+                                    }
+                                    else {
+                                        legume.setSpeed_growth(5);
+                                    }
+                                    //température 18 27
+                                    if(simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()>=18 && simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()<=27) {
+                                        legume.setSpeed_growth(legume.getSpeed_growth()+10);
+                                    }
+                                    else {
+                                        legume.setSpeed_growth(5);
+                                    }
+                                    // fin meteo pour tomate
                                     //on affiche une image différete en fonction de la taille du legume si sa resistance est à 0 on le détruit
                                     if(legume.getSize()<=40 ) {
                                         tabJLabel[x][y].setIcon(icoTomate);
@@ -677,35 +695,51 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     // chargement de l'image entière comme icone
     private ImageIcon chargerIcone(String urlIcone) {
         BufferedImage image = null;
+
         try {
             image = ImageIO.read(new File(urlIcone));
         } catch (IOException ex) {
             Logger.getLogger(VueControleurPotager.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
+
+
         return new ImageIcon(image);
     }
 
     // chargement d'une sous partie de l'image
     private ImageIcon chargerIcone(String urlIcone, int x, int y, int w, int h) {
         // charger une sous partie de l'image à partir de ses coordonnées dans urlIcone
-        BufferedImage bi = getSubImage(urlIcone, x, y, w, h);
-        // adapter la taille de l'image a la taille du composant (ici : 20x20)
-        return new ImageIcon(bi.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH));
+        if (getSubImage(urlIcone, x, y, w, h) != null) {
+            BufferedImage bi = getSubImage(urlIcone, x, y, w, h);
+            return new ImageIcon(bi.getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+
+        }
+
+       else {
+           return null;
+        }
     }
 
     private BufferedImage getSubImage(String urlIcone, int x, int y, int w, int h) {
         BufferedImage image = null;
 
         try {
-            File f = new File(urlIcone);
-            image = ImageIO.read(new File(urlIcone));
+           // File f = new File("Images/data.png");
+            image = ImageIO.read(new File("Images/data.png"));
+            //image = ImageIO.read(new File(urlIcone));
         } catch (IOException ex) {
             Logger.getLogger(VueControleurPotager.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
-        BufferedImage bi = image.getSubimage(x, y, w, h);
-        return bi;
+        if (image!=null) {
+            BufferedImage bi = image.getSubimage(x, y, w, h);
+            return bi;
+        }
+        else {
+            return null;
+        }
+
     }
 
 
