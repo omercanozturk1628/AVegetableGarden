@@ -104,11 +104,14 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
 
 
    private JLabel valeur_precipitation = new JLabel();
-    private JLabel texte_precipitation = new JLabel("Precipitation: ");
+    private JLabel texte_precipitation = new JLabel("Humidité: ");
     private JLabel valeur_temperature = new JLabel();
     private JLabel texte_temperature = new JLabel("température: ");
-    JLabel texte_legume = new JLabel("Legumes: ");
-    JLabel texte_argent = new JLabel("Argent: ");
+    private JLabel logo_humidite  = new JLabel();
+    private ImageIcon icoHumidite;
+    private JLabel logo_temperature  = new JLabel();
+    private ImageIcon icoTemperature;
+
 
     JLabel texte_score = new JLabel("Score: ");
 
@@ -178,6 +181,8 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
         icoMur = chargerIcone("Images/Mur.png");
         icoTerre = chargerIcone("Images/Terre.png");
         IcoRecolte = chargerIcone("Images/main.svg.png");
+        icoHumidite = chargerIcone("Images/water.png");
+        icoTemperature = chargerIcone("Images/temperature.png");
 
         icoAnanas = chargerIcone("Images/data.png", 2374, 781, 40, 40);
         icoAnanas2 = chargerIcone("Images/data.png", 2374, 781, 60, 60);
@@ -241,10 +246,14 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
         JPanel infos2 = new JPanel();//le panal du slide cursor
         JPanel infos3 = new JPanel();//le score du joueur
         // on ajoute les info de la météo
+        logo_temperature =  new JLabel(icoTemperature);
+        logo_humidite =  new JLabel(icoHumidite);
         infos.add(texte_precipitation);
         infos.add(valeur_precipitation);
+        infos.add(logo_humidite);
         infos.add(texte_temperature);
         infos.add(valeur_temperature);
+        infos.add(logo_temperature);
         // le slider
         label = new JLabel("Ralentissement");
         slider = new JSlider(JSlider.HORIZONTAL, 1, 10, 5);// le dernier argument est la position par défaut
