@@ -37,14 +37,52 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     private int sizeY;
 
     // icones affichées dans la grille
-    private ImageIcon icoSalade;
-    private ImageIcon icoChampignon;
-    private ImageIcon icoTomate;
+
     private ImageIcon icoAnanas;
+    private ImageIcon icoAnanas2;
+    private ImageIcon icoAnanas3;
+    private ImageIcon icoAnanas4;
+    private ImageIcon icoAnanas5;
     private ImageIcon icoBanane;
-    private ImageIcon icoCerise;
-    private ImageIcon icoPeche;
+    private ImageIcon icoBanane2;
+    private ImageIcon icoBanane3;
+    private ImageIcon icoBanane4;
+    private ImageIcon icoBanane5;
+
     private ImageIcon icoCarrotte;
+    private ImageIcon icoCarrotte2;
+    private ImageIcon icoCarrotte3;
+    private ImageIcon icoCarrotte4;
+    private ImageIcon icoCarrotte5;
+    private ImageIcon icoCerise;
+    private ImageIcon icoCerise2;
+    private ImageIcon icoCerise3;
+    private ImageIcon icoCerise4;
+    private ImageIcon icoCerise5;
+
+    private ImageIcon icoChampignon;
+    private ImageIcon icoChampignon2;
+    private ImageIcon icoChampignon3;
+    private ImageIcon icoChampignon4;
+    private ImageIcon icoChampignon5;
+    private ImageIcon icoPeche;
+    private ImageIcon icoPeche2;
+    private ImageIcon icoPeche3;
+    private ImageIcon icoPeche4;
+    private ImageIcon icoPeche5;
+
+    private ImageIcon icoSalade;
+    private ImageIcon icoSalade2;
+    private ImageIcon icoSalade3;
+    private ImageIcon icoSalade4;
+    private ImageIcon icoSalade5;
+
+    private ImageIcon icoTomate;
+    private ImageIcon icoTomate2;
+    private ImageIcon icoTomate3;
+    private ImageIcon icoTomate4;
+    private ImageIcon icoTomate5;
+
     private ImageIcon icoTerre;
     private ImageIcon icoVide;
     private ImageIcon icoMur;
@@ -135,14 +173,62 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
 
     private void chargerLesIcones() {
     	// image libre de droits utilisée pour les légumes : https://www.vecteezy.com/vector-art/2559196-bundle-of-fruits-and-vegetables-icons
-        icoSalade = chargerIcone("Images/data.png", 0, 0, 120, 120);
-        icoAnanas = chargerIcone("Images/data.png", 2374, 781, 120, 120);
-        icoChampignon = chargerIcone("Images/data.png", 396, 0, 120, 120);
-        icoBanane = chargerIcone("Images/data.png", 1951, 1169, 120, 120);
-        icoTomate = chargerIcone("Images/data.png", 3121, 1169, 120, 120);
-        icoCerise = chargerIcone("Images/data.png", 1953, 789, 120, 120);
-        icoPeche = chargerIcone("Images/data.png", 1169, 1192, 120, 120);
-        icoCarrotte = chargerIcone("Images/data.png",395,391,120,120);
+
+        icoAnanas = chargerIcone("Images/data.png", 2374, 781, 40, 40);
+        icoAnanas2 = chargerIcone("Images/data.png", 2374, 781, 60, 60);
+        icoAnanas3 = chargerIcone("Images/data.png", 2374, 781, 80, 80);
+        icoAnanas4 = chargerIcone("Images/data.png", 2374, 781, 100, 100);
+        icoAnanas5 = chargerIcone("Images/data.png", 2374, 781, 120, 120);
+
+        icoBanane = chargerIcone("Images/data.png", 1951, 1169, 40, 40);
+        icoBanane2 = chargerIcone("Images/data.png", 1951, 1169, 60, 60);
+        icoBanane3 = chargerIcone("Images/data.png", 1951, 1169, 80, 80);
+        icoBanane4 = chargerIcone("Images/data.png", 1951, 1169, 100, 100);
+        icoBanane5 = chargerIcone("Images/data.png", 1951, 1169, 100, 100);
+
+        icoSalade = chargerIcone("Images/data.png", 0, 0, 40, 40);
+        icoSalade2 = chargerIcone("Images/data.png", 0, 0, 60, 60);
+        icoSalade3 = chargerIcone("Images/data.png", 0, 0, 80, 80);
+        icoSalade4 = chargerIcone("Images/data.png", 0, 0, 100, 100);
+        icoSalade5 = chargerIcone("Images/data.png", 0, 0, 120, 120);
+
+
+        icoChampignon = chargerIcone("Images/data.png", 396, 0, 40, 40);
+        icoChampignon2 = chargerIcone("Images/data.png", 396, 0, 60, 60);
+        icoChampignon3 = chargerIcone("Images/data.png", 396, 0, 80, 80);
+        icoChampignon4 = chargerIcone("Images/data.png", 396, 0, 100, 100);
+        icoChampignon5 = chargerIcone("Images/data.png", 396, 0, 120, 120);
+
+
+        icoTomate = chargerIcone("Images/data.png", 3121, 1169, 40, 40);
+        icoTomate2 = chargerIcone("Images/data.png", 3121, 1169, 60, 60);
+        icoTomate3 = chargerIcone("Images/data.png", 3121, 1169, 80, 80);
+        icoTomate4 = chargerIcone("Images/data.png", 3121, 1169, 100, 100);
+        icoTomate5 = chargerIcone("Images/data.png", 3121, 1169, 120, 120);
+
+
+        icoCerise = chargerIcone("Images/data.png", 1953, 789, 40, 40);
+        icoCerise2 = chargerIcone("Images/data.png", 1953, 789, 60, 60);
+        icoCerise3 = chargerIcone("Images/data.png", 1953, 789, 80, 80);
+        icoCerise4 = chargerIcone("Images/data.png", 1953, 789, 100,100 );
+        icoCerise5 = chargerIcone("Images/data.png", 1953, 789, 120, 120);
+
+
+        icoPeche = chargerIcone("Images/data.png", 1169, 1192, 40, 40);
+        icoPeche2 = chargerIcone("Images/data.png", 1169, 1192, 60, 60);
+        icoPeche3 = chargerIcone("Images/data.png", 1169, 1192, 80, 80);
+        icoPeche4 = chargerIcone("Images/data.png", 1169, 1192, 100, 100);
+        icoPeche5 = chargerIcone("Images/data.png", 1169, 1192, 120, 120);
+
+
+        icoCarrotte = chargerIcone("Images/data.png",395,391,40,40);
+        icoCarrotte2 = chargerIcone("Images/data.png",395,391,60,60);
+        icoCarrotte3 = chargerIcone("Images/data.png",395,391,80,80);
+        icoCarrotte4 = chargerIcone("Images/data.png",395,391,100,100);
+        icoCarrotte5 = chargerIcone("Images/data.png",395,391,120,120);
+
+
+
         icoVide = chargerIcone("Images/Vide.png");
         icoMur = chargerIcone("Images/Mur.png");
         icoTerre = chargerIcone("Images/Terre.png");
@@ -385,11 +471,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
 
                             switch (legume.getVariete()) {
                                 case CARROTTE:
-                                    //on recupere la taille de base du legume si sa resistance est à 0 on le détruit
-                                    tabJLabel[x][y].setIcon(chargerIcone("Images/data.png", 395,391,legume.getSize(), legume.getSize()));
-                                    if(legume.getResistance()<0) {
-                                        simulateurPotager.actionUtilisateur(x,y,"TERRE");
-                                    }
+                                    tabJLabel[x][y].setIcon(icoCarrotte);
                                     break;
                                 case SALADE:
                                     tabJLabel[x][y].setIcon(icoSalade);
@@ -405,15 +487,30 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                                     tabJLabel[x][y].setIcon(icoPeche);
                                     break;
                                 case BANANE:
-                                    //on recupere la taille de base du legume si sa resistance est à 0 on le détruit
-                                    tabJLabel[x][y].setIcon(chargerIcone("Images/data.png", 1951, 1169, legume.getSize(), legume.getSize()));
-                                    if(legume.getResistance()<0) {
-                                        simulateurPotager.actionUtilisateur(x,y,"TERRE");
-                                    }
+                                    tabJLabel[x][y].setIcon(icoBanane);
                                     break;
                                 case ANANAS:
                                     //on recupere la taille de base du legume si sa resistance est à 0 on le détruit
-                                    tabJLabel[x][y].setIcon(chargerIcone("Images/data.png", 2374, 781, legume.getSize(), legume.getSize()));
+                                    if(legume.getSize()<=40 ) {
+                                        tabJLabel[x][y].setIcon(icoAnanas);
+                                    }
+                                    else if (legume.getSize()>40 && legume.getSize()<=60) {
+                                        tabJLabel[x][y].setIcon(icoAnanas2);
+
+                                    }
+                                    else if (legume.getSize()>60 && legume.getSize()<=80) {
+                                        tabJLabel[x][y].setIcon(icoAnanas3);
+
+                                    }
+                                    else if (legume.getSize()>80 && legume.getSize()<=100) {
+                                        tabJLabel[x][y].setIcon(icoAnanas4);
+
+                                    }
+                                    else  {
+                                        tabJLabel[x][y].setIcon(icoAnanas5);
+
+                                    }
+
                                     if(legume.getResistance()<0) {
                                         simulateurPotager.actionUtilisateur(x,y,"TERRE");
                                     }

@@ -7,7 +7,7 @@ public class Carrotte extends Legume {
 
     public Carrotte() {
         size=40;// taille de base du legume sur la grille
-        speed_growth=10;// à chaque maj la taille augmentera de 10
+        speed_growth=40;// à chaque maj la taille augmentera de 10
         resistance=4;
     }
     @Override
@@ -49,7 +49,7 @@ public class Carrotte extends Legume {
     protected void croissance() {
         System.out.println("une carrotte est pousse!");
         if(size<120) {
-            size=size+10;
+            size=size+speed_growth;
         }
         else {
             resistance--;// si le legume à atteint sa taille max il disparaitra après un certain temps

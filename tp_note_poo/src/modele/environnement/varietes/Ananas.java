@@ -6,7 +6,7 @@ public class Ananas extends Legume {
     private int resistance;// une fois que le legume a finis de atteint sa taille taille max il disparaitra après un temps
 
     public Ananas() {
-        size=40;// taille de base du legume sur la grille
+        size=30;// taille de base du legume sur la grille
         speed_growth=10;// à chaque maj la taille augmentera de 10
         resistance=4;
     }
@@ -19,7 +19,7 @@ public class Ananas extends Legume {
     protected void croissance() {
         System.out.println("Une ananas pousse !!");
         if(size<120) {
-            size=size+10;
+            size=size+speed_growth;
         }
         else {
             resistance--;// si le legume à atteint sa taille max il disparaitra après un certain temps
