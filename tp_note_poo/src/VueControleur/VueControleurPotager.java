@@ -133,6 +133,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     JComponent grilleJLabels;// la grille qui contient toutes les cases
 
     public VueControleurPotager(SimulateurPotager _simulateurPotager) {
+        score_general=0;
         // on ajoute les couleurs du matin, après-midi et soir
         index_couleur_actu=0;
         couleur_grille.add(new Color(135,206,235));//matin
@@ -417,6 +418,8 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                     Legume leg = case_actu.getLegumeCaseCultivable();
                     System.out.println("on récolte un " + leg.getVariete());
                     simulateurPotager.actionUtilisateur(x_actu,y_actu,"TERRE");
+                    // on augmente le score en fonction du legume et sa taille
+                    score_general+=score_general+leg.getScore()*(leg.getSize()/10);
                     // on met à jours l'affichage
                     mettreAJourAffichage();
                 }
@@ -442,7 +445,8 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
             //on met à jour l'affichage de la météo
             valeur_precipitation.setText(String.valueOf(simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations() + " %"));
             valeur_temperature.setText(String.valueOf(simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement() + " °"));
-
+            // on met à jour le score
+            valeur_score.setText(String.valueOf(score_general));
             for (int x = 0; x < sizeX; x++) {
                 for (int y = 0; y < sizeY; y++) {
                     // on met à jour la taille de chaque legume
