@@ -174,7 +174,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
         icoVide = chargerIcone("Images/Vide.png");
         icoMur = chargerIcone("Images/Mur.png");
         icoTerre = chargerIcone("Images/Terre.png");
-        IcoRecolte = chargerIcone("Images/Terre.png");
+        IcoRecolte = chargerIcone("Images/main.svg.png");
 
         icoAnanas = chargerIcone("Images/data.png", 2374, 781, 40, 40);
         icoAnanas2 = chargerIcone("Images/data.png", 2374, 781, 60, 60);
@@ -231,7 +231,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     }
 
     private void placerLesComposantsGraphiques() {
-        setTitle("A vegetable garden");
+        setTitle("Simulateur de potager");
         setSize(1100, 525);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // permet de terminer l'application à la fermeture de la fenêtre
         JPanel infos = new JPanel();// info sur la météo
@@ -457,6 +457,26 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
 
                             switch (legume.getVariete()) {
                                 case CARROTTE:
+                                    // on fait varier la vitesse de croissance en fonction de la météo pour carotte
+                                    // humidité 60 80
+                                    if(simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations()>=60 && simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations()<=80 ) {
+                                        legume.setSpeed_growth(legume.getSpeed_growth()+10);
+                                    }
+                                    else {
+                                        legume.setSpeed_growth(5);
+                                    }
+                                    //température 8 29
+                                    if(simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()>=8 && simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()<=29) {
+                                        legume.setSpeed_growth(legume.getSpeed_growth()+10);
+                                    }
+                                    // si il fait trop froid le legume grandit pas
+                                    else if(simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()>=0 && simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()<=5) {
+                                        legume.setSpeed_growth(0);
+                                    }
+                                    else {
+                                        legume.setSpeed_growth(5);
+                                    }
+                                    // fin meteo pour carotte
                                     //on affiche une image différete en fonction de la taille du legume si sa resistance est à 0 on le détruit
                                     if(legume.getSize()<=40 ) {
                                         tabJLabel[x][y].setIcon(icoCarrotte);
@@ -483,6 +503,26 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                                     }
                                     break;
                                 case SALADE:
+                                    // on fait varier la vitesse de croissance en fonction de la météo pour Salade
+                                    // humidité 60 80
+                                    if(simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations()>=60 && simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations()<=80 ) {
+                                        legume.setSpeed_growth(legume.getSpeed_growth()+10);
+                                    }
+                                    else {
+                                        legume.setSpeed_growth(5);
+                                    }
+                                    //température 18 20 dans les bonnes conditions le legume grandit + vite
+                                    if(simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()>=18 && simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()<=20) {
+                                        legume.setSpeed_growth(legume.getSpeed_growth()+10);
+                                    }
+                                    // si il fait trop froid le legume grandit pas
+                                    else if(simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()>=0 && simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()<=5) {
+                                        legume.setSpeed_growth(0);
+                                    }
+                                    else {
+                                        legume.setSpeed_growth(5);
+                                    }
+                                    // fin meteo pour salade
                                     //on affiche une image différete en fonction de la taille du legume si sa resistance est à 0 on le détruit
                                     if(legume.getSize()<=40 ) {
                                         tabJLabel[x][y].setIcon(icoSalade);
@@ -522,6 +562,10 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                                     if(simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()>=18 && simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()<=27) {
                                         legume.setSpeed_growth(legume.getSpeed_growth()+10);
                                     }
+                                    // si il fait trop froid le legume grandit pas
+                                    else if(simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()>=0 && simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()<=5) {
+                                        legume.setSpeed_growth(0);
+                                    }
                                     else {
                                         legume.setSpeed_growth(5);
                                     }
@@ -553,6 +597,23 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                                     break;
 
                                 case PECHE:
+                                    // on fait varier la vitesse de croissance en fonction de la météo pour peche
+                                    // humidité 60 80
+                                    if(simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations()>=60 && simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations()<=80 ) {
+                                        legume.setSpeed_growth(legume.getSpeed_growth()+10);
+                                    }
+                                    else {
+                                        legume.setSpeed_growth(5);
+                                    }
+                                    //température 10 30
+                                    if(simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()>=18 && simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()<=27) {
+                                        legume.setSpeed_growth(legume.getSpeed_growth()+10);
+                                    }
+                                    // si il fait trop froid le legume grandit pas
+                                    else if(simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()<=0) {
+                                        legume.setSpeed_growth(0);
+                                    }
+                                    // fin meteo pour peche
                                     //on affiche une image différete en fonction de la taille du legume si sa resistance est à 0 on le détruit
                                     if(legume.getSize()<=40 ) {
                                         tabJLabel[x][y].setIcon(icoPeche);
@@ -579,6 +640,26 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                                     }
                                     break;
                                 case BANANE:
+                                    // on fait varier la vitesse de croissance en fonction de la météo pour banane
+                                    // humidité 60 80
+                                    if(simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations()>=60 && simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations()<=80 ) {
+                                        legume.setSpeed_growth(legume.getSpeed_growth()+10);
+                                    }
+                                    else {
+                                        legume.setSpeed_growth(5);
+                                    }
+                                    //température 20 28
+                                    if(simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()>=20 && simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()<=28) {
+                                        legume.setSpeed_growth(legume.getSpeed_growth()+10);
+                                    }
+                                    // si il fait trop froid le legume grandit pas
+                                    else if(simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()>=0 && simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()<=5) {
+                                        legume.setSpeed_growth(0);
+                                    }
+                                    else {
+                                        legume.setSpeed_growth(5);
+                                    }
+                                    // fin meteo pour banane
                                     //on affiche une image différete en fonction de la taille du legume si sa resistance est à 0 on le détruit
                                     if(legume.getSize()<=40 ) {
                                         tabJLabel[x][y].setIcon(icoBanane);
@@ -605,6 +686,26 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                                     }
                                     break;
                                 case ANANAS:
+                                    // on fait varier la vitesse de croissance en fonction de la météo pour ananas
+                                    // humidité 60 80
+                                    if(simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations()>=60 && simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations()<=80 ) {
+                                        legume.setSpeed_growth(legume.getSpeed_growth()+10);
+                                    }
+                                    else {
+                                        legume.setSpeed_growth(5);
+                                    }
+                                    //température 18 28
+                                    if(simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()>=18 && simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()<=28) {
+                                        legume.setSpeed_growth(legume.getSpeed_growth()+10);
+                                    }
+                                    // si il fait trop froid le legume grandit pas
+                                    else if(simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()>=0 && simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()<=5) {
+                                        legume.setSpeed_growth(0);
+                                    }
+                                    else {
+                                        legume.setSpeed_growth(5);
+                                    }
+                                    // fin meteo pour ananas
                                     //on affiche une image différete en fonction de la taille du legume si sa resistance est à 0 on le détruit
                                     if(legume.getSize()<=40 ) {
                                         tabJLabel[x][y].setIcon(icoAnanas);
@@ -631,6 +732,26 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                                     }
                                     break;
                                 case CERISE:
+                                    // on fait varier la vitesse de croissance en fonction de la météo pour cerise
+                                    // humidité 60 80
+                                    if(simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations()>=60 && simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations()<=80 ) {
+                                        legume.setSpeed_growth(legume.getSpeed_growth()+10);
+                                    }
+                                    else {
+                                        legume.setSpeed_growth(5);
+                                    }
+                                    //température 18 20
+                                    if(simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()>=18 && simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()<=20) {
+                                        legume.setSpeed_growth(legume.getSpeed_growth()+10);
+                                    }
+                                    // si il fait trop froid le legume grandit pas
+                                    else if(simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()>=0 && simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement()<=5) {
+                                        legume.setSpeed_growth(0);
+                                    }
+                                    else {
+                                        legume.setSpeed_growth(5);
+                                    }
+                                    // fin meteo pour cerise
                                     //on affiche une image différete en fonction de la taille du legume si sa resistance est à 0 on le détruit
                                     if(legume.getSize()<=40 ) {
                                         tabJLabel[x][y].setIcon(icoCerise);
