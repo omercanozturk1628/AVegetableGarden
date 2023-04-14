@@ -1,16 +1,13 @@
 package VueControleur;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -114,6 +111,9 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     JLabel texte_argent = new JLabel("Argent: ");
 
     JLabel texte_score = new JLabel("Score: ");
+
+    JLabel texte_meilleur_score = new JLabel("Meilleur Score: ");
+    JLabel valeur_meilleur_score = new JLabel();
     JLabel valeur_score = new JLabel();
 
     // verifier si on peut inserer un legume
@@ -123,6 +123,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     private int y_actu;
     private int score_general;// sera augmenter quand on récolte un legume on fonction de la taille
 
+    private int meilleur_score;
     private JSlider slider;
     private JLabel label;
 
@@ -133,6 +134,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     JComponent grilleJLabels;// la grille qui contient toutes les cases
 
     public VueControleurPotager(SimulateurPotager _simulateurPotager) {
+        getBestScore();
         score_general=0;
         // on ajoute les couleurs du matin, après-midi et soir
         index_couleur_actu=0;
@@ -256,11 +258,16 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
         add(infos, BorderLayout.EAST);// la météo
         add(infos2,BorderLayout.SOUTH);// le slider
         infos3.add(texte_score);// le score
-        valeur_score.setText("Score tmp");
         infos3.add(valeur_score);
+        infos3.add(texte_meilleur_score);// le meilleur score
+        infos3.add(valeur_meilleur_score);
+
         float police_score=20.0f;
         texte_score.setFont(texte_score.getFont().deriveFont(police_score));
         valeur_score.setFont(texte_score.getFont().deriveFont(police_score));
+        texte_meilleur_score.setFont(texte_score.getFont().deriveFont(police_score));
+        valeur_meilleur_score.setFont(texte_score.getFont().deriveFont(police_score));
+
         add(infos3,BorderLayout.NORTH);
          grilleJLabels = new JPanel(new GridLayout(sizeY, sizeX)); // grilleJLabels va contenir les cases graphiques et les positionner sous la forme d'une grille
 
@@ -816,6 +823,62 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     }
 
 
+
+    //pour lire le meilleur score
+    public void getBestScore() {
+        // actualise le meilleur score en fonction du fichier score.txt
+        BufferedReader fichier_score  = null;
+        try {
+            fichier_score = new BufferedReader(new FileReader("meilleur_score/score.txt"));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            String line = fichier_score.readLine(); // <-- read whole line
+            meilleur_score = Integer.parseInt(line);
+            valeur_meilleur_score.setText(String.valueOf(meilleur_score));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            fichier_score.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    //pour sauvegarder le meilleur score
+    @Override
+    protected void processWindowEvent(WindowEvent e) {
+        BufferedWriter fichier_score  = null;
+        try {
+            fichier_score = new BufferedWriter(new FileWriter("meilleur_score/score.txt"));
+            if(score_general>meilleur_score) {
+                System.out.println("on met à jour le score");
+                try {
+                    fichier_score.write(String.valueOf(score_general));
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+            else {
+                fichier_score.write(String.valueOf(meilleur_score));
+            }
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        try {
+            fichier_score.close();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        super.processWindowEvent(e);
+    }
+
+
+
+
     // chargement de l'image entière comme icone
     private ImageIcon chargerIcone(String urlIcone) {
         BufferedImage image = null;
@@ -876,4 +939,8 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
 
 
 
+
+
 }
+
+
