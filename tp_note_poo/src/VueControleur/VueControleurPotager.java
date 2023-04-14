@@ -113,11 +113,13 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     private ImageIcon icoTemperature;
 
 
-    JLabel texte_score = new JLabel("Score: ");
+    private JLabel texte_score = new JLabel("Score: ");
 
-    JLabel texte_meilleur_score = new JLabel("Meilleur Score: ");
-    JLabel valeur_meilleur_score = new JLabel();
-    JLabel valeur_score = new JLabel();
+    private JLabel texte_meilleur_score = new JLabel("Meilleur Score: ");
+    private JLabel valeur_meilleur_score = new JLabel();
+    private JLabel valeur_score = new JLabel();
+
+    private JButton bouton_info=new JButton("À propos");
 
     // verifier si on peut inserer un legume
     private boolean a_deja_legume;
@@ -239,6 +241,36 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     }
 
     private void placerLesComposantsGraphiques() {
+
+        bouton_info.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                JOptionPane.showMessageDialog(popupMenu,"Voici les information relatives aux fruits legumes" + "\n" + "\n"
+                         + "Ananas : "
+                        + "Score : 2 "
+                        + "vitesse de croissance de base : 10"
+                        + " température favorable 18° - 28° " +
+                        "humidité favorable 60% - 80% "
+                        +"résistance: 4 "
+                        + "\n"
+                        + "\n"
+                        + "Banane : "
+                        + "Score : 4 "
+                        + "vitesse de croissance de base : 14"
+                        + " température favorable 20° - 28° " +
+                        "humidité favorable 60% - 80% "
+                        +"résistance: 2 "
+                        + "\n"
+                        + "\n"
+                        + "Carrotte : "
+                        + "Score : 1 "
+                        + "vitesse de croissance de base : 20"
+                        + " température favorable 8° - 29° " +
+                        "humidité favorable 60% - 80% "
+                        +"résistance: 6 "
+                        + "\n");
+            }
+        });
+
         setTitle("Simulateur de potager");
         setSize(1100, 525);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // permet de terminer l'application à la fermeture de la fenêtre
@@ -264,6 +296,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
         slider.addChangeListener(this);
         infos2.add(label);
         infos2.add(slider);
+        infos2.add(bouton_info);// le bouton qui explique
         add(infos, BorderLayout.EAST);// la météo
         add(infos2,BorderLayout.SOUTH);// le slider
         infos3.add(texte_score);// le score

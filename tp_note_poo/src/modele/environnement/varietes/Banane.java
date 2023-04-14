@@ -11,7 +11,7 @@ public class Banane extends Legume {
     private int score;// le score que rapporte un legume quand on le recolte
     public Banane() {
         size=30;// taille de base du legume sur la grille
-        speed_growth=10;// à chaque maj la taille augmentera de 10
+        speed_growth=14;// à chaque maj la taille augmentera de 10
         resistance=2;
         score=4;
     }
