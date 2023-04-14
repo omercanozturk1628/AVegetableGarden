@@ -7,8 +7,8 @@ public class Carrotte extends Legume {
 
     public Carrotte() {
         size=40;// taille de base du legume sur la grille
-        speed_growth=40;// à chaque maj la taille augmentera de 10
-        resistance=4;
+        speed_growth=10;// à chaque maj la taille augmentera de 10
+        resistance=6;
     }
     @Override
     public Varietes getVariete() {

@@ -8,7 +8,7 @@ public class Cerise extends Legume {
     public Cerise() {
         size=40;// taille de base du legume sur la grille
         speed_growth=10;// à chaque maj la taille augmentera de 10
-        resistance=4;
+        resistance=2;
     }
 
 
@@ -50,7 +50,7 @@ public class Cerise extends Legume {
     protected void croissance() {
         System.out.println("Une cerise pousse !!");
         if(size<120) {
-            size=size+10;
+            size=size+speed_growth;
         }
         else {
             resistance--;// si le legume à atteint sa taille max il disparaitra après un certain temps

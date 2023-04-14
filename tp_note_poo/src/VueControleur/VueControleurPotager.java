@@ -453,24 +453,139 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
 
                             switch (legume.getVariete()) {
                                 case CARROTTE:
-                                    tabJLabel[x][y].setIcon(icoCarrotte);
+                                    //on affiche une image différete en fonction de la taille du legume si sa resistance est à 0 on le détruit
+                                    if(legume.getSize()<=40 ) {
+                                        tabJLabel[x][y].setIcon(icoCarrotte);
+                                    }
+                                    else if (legume.getSize()>40 && legume.getSize()<=60) {
+                                        tabJLabel[x][y].setIcon(icoCarrotte2);
+
+                                    }
+                                    else if (legume.getSize()>60 && legume.getSize()<=80) {
+                                        tabJLabel[x][y].setIcon(icoCarrotte3);
+
+                                    }
+                                    else if (legume.getSize()>80 && legume.getSize()<=100) {
+                                        tabJLabel[x][y].setIcon(icoCarrotte4);
+
+                                    }
+                                    else  {
+                                        tabJLabel[x][y].setIcon(icoCarrotte5);
+
+                                    }
+
+                                    if(legume.getResistance()<0) {
+                                        simulateurPotager.actionUtilisateur(x,y,"TERRE");
+                                    }
                                     break;
                                 case SALADE:
-                                    tabJLabel[x][y].setIcon(icoSalade);
+                                    //on affiche une image différete en fonction de la taille du legume si sa resistance est à 0 on le détruit
+                                    if(legume.getSize()<=40 ) {
+                                        tabJLabel[x][y].setIcon(icoSalade);
+                                    }
+                                    else if (legume.getSize()>40 && legume.getSize()<=60) {
+                                        tabJLabel[x][y].setIcon(icoSalade2);
+
+                                    }
+                                    else if (legume.getSize()>60 && legume.getSize()<=80) {
+                                        tabJLabel[x][y].setIcon(icoSalade3);
+
+                                    }
+                                    else if (legume.getSize()>80 && legume.getSize()<=100) {
+                                        tabJLabel[x][y].setIcon(icoSalade4);
+
+                                    }
+                                    else  {
+                                        tabJLabel[x][y].setIcon(icoSalade5);
+
+                                    }
+
+                                    if(legume.getResistance()<0) {
+                                        simulateurPotager.actionUtilisateur(x,y,"TERRE");
+                                    }
                                     break;
 
                                 case TOMATE:
-                                    tabJLabel[x][y].setIcon(icoTomate);
+                                    //on affiche une image différete en fonction de la taille du legume si sa resistance est à 0 on le détruit
+                                    if(legume.getSize()<=40 ) {
+                                        tabJLabel[x][y].setIcon(icoTomate);
+                                    }
+                                    else if (legume.getSize()>40 && legume.getSize()<=60) {
+                                        tabJLabel[x][y].setIcon(icoTomate2);
+
+                                    }
+                                    else if (legume.getSize()>60 && legume.getSize()<=80) {
+                                        tabJLabel[x][y].setIcon(icoTomate3);
+
+                                    }
+                                    else if (legume.getSize()>80 && legume.getSize()<=100) {
+                                        tabJLabel[x][y].setIcon(icoTomate4);
+
+                                    }
+                                    else  {
+                                        tabJLabel[x][y].setIcon(icoTomate5);
+
+                                    }
+
+                                    if(legume.getResistance()<0) {
+                                        simulateurPotager.actionUtilisateur(x,y,"TERRE");
+                                    }
                                     break;
 
                                 case PECHE:
-                                    tabJLabel[x][y].setIcon(icoPeche);
+                                    //on affiche une image différete en fonction de la taille du legume si sa resistance est à 0 on le détruit
+                                    if(legume.getSize()<=40 ) {
+                                        tabJLabel[x][y].setIcon(icoPeche);
+                                    }
+                                    else if (legume.getSize()>40 && legume.getSize()<=60) {
+                                        tabJLabel[x][y].setIcon(icoPeche2);
+
+                                    }
+                                    else if (legume.getSize()>60 && legume.getSize()<=80) {
+                                        tabJLabel[x][y].setIcon(icoPeche3);
+
+                                    }
+                                    else if (legume.getSize()>80 && legume.getSize()<=100) {
+                                        tabJLabel[x][y].setIcon(icoPeche4);
+
+                                    }
+                                    else  {
+                                        tabJLabel[x][y].setIcon(icoPeche5);
+
+                                    }
+
+                                    if(legume.getResistance()<0) {
+                                        simulateurPotager.actionUtilisateur(x,y,"TERRE");
+                                    }
                                     break;
                                 case BANANE:
-                                    tabJLabel[x][y].setIcon(icoBanane);
+                                    //on affiche une image différete en fonction de la taille du legume si sa resistance est à 0 on le détruit
+                                    if(legume.getSize()<=40 ) {
+                                        tabJLabel[x][y].setIcon(icoBanane);
+                                    }
+                                    else if (legume.getSize()>40 && legume.getSize()<=60) {
+                                        tabJLabel[x][y].setIcon(icoBanane2);
+
+                                    }
+                                    else if (legume.getSize()>60 && legume.getSize()<=80) {
+                                        tabJLabel[x][y].setIcon(icoBanane3);
+
+                                    }
+                                    else if (legume.getSize()>80 && legume.getSize()<=100) {
+                                        tabJLabel[x][y].setIcon(icoBanane4);
+
+                                    }
+                                    else  {
+                                        tabJLabel[x][y].setIcon(icoBanane5);
+
+                                    }
+
+                                    if(legume.getResistance()<0) {
+                                        simulateurPotager.actionUtilisateur(x,y,"TERRE");
+                                    }
                                     break;
                                 case ANANAS:
-                                    //on recupere la taille de base du legume si sa resistance est à 0 on le détruit
+                                    //on affiche une image différete en fonction de la taille du legume si sa resistance est à 0 on le détruit
                                     if(legume.getSize()<=40 ) {
                                         tabJLabel[x][y].setIcon(icoAnanas);
                                     }
@@ -496,7 +611,30 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                                     }
                                     break;
                                 case CERISE:
-                                    tabJLabel[x][y].setIcon(icoCerise);
+                                    //on affiche une image différete en fonction de la taille du legume si sa resistance est à 0 on le détruit
+                                    if(legume.getSize()<=40 ) {
+                                        tabJLabel[x][y].setIcon(icoCerise);
+                                    }
+                                    else if (legume.getSize()>40 && legume.getSize()<=60) {
+                                        tabJLabel[x][y].setIcon(icoCerise2);
+
+                                    }
+                                    else if (legume.getSize()>60 && legume.getSize()<=80) {
+                                        tabJLabel[x][y].setIcon(icoCerise3);
+
+                                    }
+                                    else if (legume.getSize()>80 && legume.getSize()<=100) {
+                                        tabJLabel[x][y].setIcon(icoCerise4);
+
+                                    }
+                                    else  {
+                                        tabJLabel[x][y].setIcon(icoCerise5);
+
+                                    }
+
+                                    if(legume.getResistance()<0) {
+                                        simulateurPotager.actionUtilisateur(x,y,"TERRE");
+                                    }
                                     break;
                             }
 
