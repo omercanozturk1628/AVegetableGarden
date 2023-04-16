@@ -84,7 +84,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     private JLabel[][] tabJLabel;// cases graphique (au moment du rafraichissement, chaque case va être associée à une icône, suivant ce qui est présent dans le modèle)
 
     private JPopupMenu popupMenu = new JPopupMenu();
-    private JButton buttonVendre = new JButton("Sell/Purchase");
+    private JButton buttonVendre = new JButton("Vendre / Acheter");
 
     private  JMenuItem menuSalade = new JMenuItem("Salade");
     private JMenuItem menuCarrotte = new JMenuItem("Carrotte");

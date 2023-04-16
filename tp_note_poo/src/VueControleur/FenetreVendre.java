@@ -42,11 +42,11 @@ public class FenetreVendre extends JFrame {
 
     private int numTotal = numAnanasInt + numCarrotteInt + numCeriseInt + numBananeInt + numPecheInt + numSaladeInt + numTomateInt + numChampInt;
 
-    private String[] legumes = {"Ananas","Banane","Carrotte","Cerise","Champignon","Peche","Salade","Tomate"};
+    private String[] legumes = {"Ananas","Banane","Carrotte","Cerise","Peche","Salade","Tomate"};
     private JComboBox<String> comboBox = new JComboBox<String>(legumes);
 
-    private JButton sellButton = new JButton("Sell");
-    private JButton buyButton = new JButton("Buy");
+    private JButton sellButton = new JButton("Vendre");
+    private JButton buyButton = new JButton("Acheter");
 
     private int size_x = 500;
     private int size_y = 200;
@@ -64,7 +64,7 @@ public class FenetreVendre extends JFrame {
         panelVendre.add(numBanane);
         panelVendre.add(numCarrotte);
         panelVendre.add(numCerise);
-        panelVendre.add(numChamp);
+        //panelVendre.add(numChamp);
         panelVendre.add(numPeche);
         panelVendre.add(numSalade);
         panelVendre.add(numTomate);
@@ -77,12 +77,12 @@ public class FenetreVendre extends JFrame {
                             numAnanasInt--;
                             argent += 6;
                             numAnanas.setText("Ananas: " + numAnanasInt);
-                            JOptionPane.showMessageDialog(sellButton,"SOLD!");
+                            JOptionPane.showMessageDialog(sellButton,"Vendu !");
                             break;
 
                         }
                         else{
-                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez pas aucun de cet legume!");
+                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez aucun fruit ou légume de cette variété");
                             break;
                         }
 
@@ -91,13 +91,13 @@ public class FenetreVendre extends JFrame {
                             numBananeInt--;
                             argent+= 8;
                             numBanane.setText("Banane: " + numBananeInt);
-                            JOptionPane.showMessageDialog(sellButton,"SOLD!");
+                            JOptionPane.showMessageDialog(sellButton,"Vendu !");
                             break;
 
 
                         }
                         else{
-                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez pas aucun de cet legume!");
+                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez aucun fruit ou légume de cette variété");
                             break;
                         }
                     case 2:
@@ -105,12 +105,12 @@ public class FenetreVendre extends JFrame {
                             numCarrotteInt--;
                             argent += 3;
                             numCarrotte.setText("Carrotte: " + numCarrotteInt);
-                            JOptionPane.showMessageDialog(sellButton,"SOLD!");
+                            JOptionPane.showMessageDialog(sellButton,"Vendu !");
                             break;
 
                         }
                         else{
-                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez pas aucun de cet legume!");
+                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez aucun fruit ou légume de cette variété!");
                             break;
                         }
                     case 3:
@@ -118,67 +118,55 @@ public class FenetreVendre extends JFrame {
                             numCeriseInt--;
                             argent += 4;
                             numCerise.setText("Cerise: " + numCeriseInt);
-                            JOptionPane.showMessageDialog(sellButton,"SOLD!");
+                            JOptionPane.showMessageDialog(sellButton,"Vendu !");
                             break;
 
                         }
                         else{
-                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez pas aucun de cet legume!");
+                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez aucun fruit ou légume de cette variété");
                             break;
                         }
+
+
 
                     case 4:
-                        if(numChampInt > 0){
-                            numChampInt--;
-                            argent += 9;
-                            numChamp.setText("Champignon: " + numChampInt);
-                            JOptionPane.showMessageDialog(sellButton,"SOLD!");
-                            break;
-
-                        }
-                        else{
-                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez pas aucun de cet legume!");
-                            break;
-                        }
-
-                    case 5:
                         if(numPecheInt > 0){
                             numPecheInt--;
                             argent += 4;
                             numPeche.setText("Peche: " + numPecheInt);
-                            JOptionPane.showMessageDialog(sellButton,"SOLD!");
+                            JOptionPane.showMessageDialog(sellButton,"Vendu!");
                             break;
 
                         }
                         else{
-                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez pas aucun de cet legume!");
+                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez aucun fruit ou légume de cette variété");
                             break;
                         }
 
-                    case 6:
+                    case 5:
                         if(numSaladeInt > 0){
                             numSaladeInt--;
                             argent += 6;
                             numSalade.setText("Salade: " + numSaladeInt);
-                            JOptionPane.showMessageDialog(sellButton,"SOLD!");
+                            JOptionPane.showMessageDialog(sellButton,"Vendu !");
                             break;
 
                         }
                         else{
-                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez pas aucun de cet legume!");
+                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez aucun fruit ou légume de cette variété");
                             break;
                         }
-                    case 7:
+                    case 6:
                         if(numTomateInt > 0){
                             numTomateInt--;
                             argent += 2;
                             numTomate.setText("Tomate: " + numTomateInt);
-                            JOptionPane.showMessageDialog(sellButton,"SOLD!");
+                            JOptionPane.showMessageDialog(sellButton,"Vendu !");
                             break;
 
                         }
                         else{
-                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez pas aucun de cet legume!");
+                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez aucun fruit ou légume de cette variété!");
                             break;
                         }
 
@@ -217,12 +205,12 @@ public class FenetreVendre extends JFrame {
                             numAnanasInt++;
                             argent -= 6;
                             numAnanas.setText("Ananas: " + numAnanasInt);
-                            JOptionPane.showMessageDialog(buyButton,"PURCHASED!");
+                            JOptionPane.showMessageDialog(buyButton,"Acheté!");
                             break;
 
                         }
                         else{
-                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez pas suffi d'argent!");
+                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez pas assez d'argent!");
                             break;
                         }
 
@@ -231,13 +219,13 @@ public class FenetreVendre extends JFrame {
                             numBananeInt++;
                             argent-= 8;
                             numBanane.setText("Banane: " + numBananeInt);
-                            JOptionPane.showMessageDialog(buyButton,"PURCHASED!");
+                            JOptionPane.showMessageDialog(buyButton,"Acheté!");
                             break;
 
 
                         }
                         else{
-                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez pas suffi d'argent!");
+                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez pas assez d'argent!");
                             break;
                         }
                     case 2:
@@ -245,12 +233,12 @@ public class FenetreVendre extends JFrame {
                             numCarrotteInt++;
                             argent -= 3;
                             numCarrotte.setText("Carrotte: " + numCarrotteInt);
-                            JOptionPane.showMessageDialog(buyButton,"PURCHASED!");
+                            JOptionPane.showMessageDialog(buyButton,"Acheté!");
                             break;
 
                         }
                         else{
-                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez pas suffi d'argent!");
+                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez pas assez d'argent!");
                             break;
                         }
                     case 3:
@@ -258,67 +246,55 @@ public class FenetreVendre extends JFrame {
                             numCeriseInt++;
                             argent -= 4;
                             numCerise.setText("Cerise: " + numCeriseInt);
-                            JOptionPane.showMessageDialog(buyButton,"PURCHASED!");
+                            JOptionPane.showMessageDialog(buyButton,"Acheté!");
                             break;
 
                         }
                         else{
-                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez pas suffi d'argent!");
+                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez pas assez d'argent!");
                             break;
                         }
+
+
 
                     case 4:
-                        if(argent >= 9){
-                            numChampInt++;
-                            argent -= 9;
-                            numChamp.setText("Champignon: " + numChampInt);
-                            JOptionPane.showMessageDialog(buyButton,"PURCHASED!");
-                            break;
-
-                        }
-                        else{
-                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez pas suffi d'argent!");
-                            break;
-                        }
-
-                    case 5:
                         if(argent >= 4){
                             numPecheInt++;
                             argent -= 4;
                             numPeche.setText("Peche: " + numPecheInt);
-                            JOptionPane.showMessageDialog(buyButton,"PURCHASED!");
+                            JOptionPane.showMessageDialog(buyButton,"Acheté!");
                             break;
 
                         }
                         else{
-                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez pas suffi d'argent!");
+                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez pas assez d'argent!");
                             break;
                         }
 
-                    case 6:
+                    case 5:
                         if(argent >= 6){
                             numSaladeInt++;
                             argent -= 6;
                             numSalade.setText("Salade: " + numSaladeInt);
-                            JOptionPane.showMessageDialog(buyButton,"PURCHASED!");
+                            JOptionPane.showMessageDialog(buyButton,"Acheté!");
                             break;
 
                         }
                         else{
-                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez pas suffi d'argent!");
+                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez pas assez d'argent!");
                             break;
                         }
-                    case 7:
+                    case 6:
                         if(argent >= 2){
                             numTomateInt++;
                             argent -= 2;
                             numTomate.setText("Tomate: " + numTomateInt);
-                            JOptionPane.showMessageDialog(buyButton,"PURCHASED!");
+                            JOptionPane.showMessageDialog(buyButton,"Acheté!");
                             break;
 
                         }
                         else{
-                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez pas suffi d'argent!");
+                            JOptionPane.showMessageDialog(panelVendre,"Vous n'avez pas assez d'argent!");
                             break;
                         }
 
