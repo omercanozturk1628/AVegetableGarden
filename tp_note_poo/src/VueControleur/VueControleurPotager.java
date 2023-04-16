@@ -84,6 +84,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     private JLabel[][] tabJLabel;// cases graphique (au moment du rafraichissement, chaque case va être associée à une icône, suivant ce qui est présent dans le modèle)
 
     private JPopupMenu popupMenu = new JPopupMenu();
+    private JButton buttonVendre = new JButton("Sell/Purchase");
 
     private  JMenuItem menuSalade = new JMenuItem("Salade");
     private JMenuItem menuCarrotte = new JMenuItem("Carrotte");
@@ -96,8 +97,10 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     private JMenuItem menuAnanas = new JMenuItem("Ananas");
     private JMenuItem menuRecolte = new JMenuItem("récolter");
 
+    private ArrayList<Legume> legumeArrayList = new ArrayList<Legume>();
 
 
+    private FenetreVendre fenetreVendre = new FenetreVendre(legumeArrayList);
 
    private JLabel valeur_precipitation = new JLabel();
     private JLabel texte_precipitation = new JLabel("Humidité: ");
@@ -127,6 +130,8 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     private int meilleur_score;
     private JSlider slider;
     private JLabel label;
+
+    private JLabel info_arg = new JLabel("Argent: 0 €");
 
     private ArrayList<Color> couleur_grille = new ArrayList<Color>();
 
@@ -314,6 +319,35 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
         infos.add(texte_temperature);
         infos.add(valeur_temperature);
         infos.add(logo_temperature);
+        infos.add(info_arg);
+        buttonVendre.setVisible(true);
+        buttonVendre.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                fenetreVendre.setVisible(true);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+        infos.add(buttonVendre);
         // le slider
         label = new JLabel("Ralentissement");
         slider = new JSlider(JSlider.HORIZONTAL, 1, 10, 5);// le dernier argument est la position par défaut
@@ -495,6 +529,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                     Legume leg = case_actu.getLegumeCaseCultivable();
                     System.out.println("on récolte un " + leg.getVariete());
                     JOptionPane.showMessageDialog(popupMenu,"La variété  " + leg.getVariete() + " a été récoltée");
+                    fenetreVendre.insertLegume(leg);
                     simulateurPotager.actionUtilisateur(x_actu,y_actu,"TERRE");
                     // on augmente le score en fonction du legume et sa taille
                     score_general+=score_general+leg.getScore()*(leg.getSize()/10);
@@ -523,6 +558,8 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
             //on met à jour l'affichage de la météo
             valeur_precipitation.setText(String.valueOf(simulateurPotager.objetALaPosition(new Point(0, 0)).getPrécipitations() + " %"));
             valeur_temperature.setText(String.valueOf(simulateurPotager.objetALaPosition(new Point(0, 0)).getEnsolleillement() + " °"));
+            info_arg.setText("Argent: " + fenetreVendre.getArgent() + " €");
+
             // on met à jour le score
             valeur_score.setText(String.valueOf(score_general));
             for (int x = 0; x < sizeX; x++) {
