@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="tp_note_poo:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/tp_note_poo_jar</output-path>
+    <root id="archive" name="tp_note_poo.jar">
+      <element id="module-output" name="tp_note_poo" />
+    </root>
+  </artifact>
+</component>

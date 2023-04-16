@@ -7,7 +7,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -97,10 +96,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
     private JMenuItem menuAnanas = new JMenuItem("Ananas");
     private JMenuItem menuRecolte = new JMenuItem("récolter");
 
-    private ArrayList<Point> pointArrayList = new ArrayList<Point>();
 
-    private ArrayList<Point> pointHarvestList = new ArrayList<Point>();
-    private ArrayList<Legume> legumeArrayList = new ArrayList<Legume>();
 
 
    private JLabel valeur_precipitation = new JLabel();
@@ -245,60 +241,60 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
         bouton_info.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 JOptionPane.showMessageDialog(popupMenu,"Voici les information relatives aux fruits legumes" + "\n" + "\n"
-                         + "Ananas : "
-                        + "Score : 2 "
-                        + "vitesse de croissance de base : 10"
+                         + "Ananas :  "
+                        + "Score : 2  "
+                        + "vitesse de croissance de base : 10 "
                         + " température favorable 18° - 28° " +
-                        "humidité favorable 60% - 80% "
+                        "humidité favorable 60% - 80%  "
                         +"résistance: 4 "
                         + "\n"
                         + "\n"
-                        + "Banane : "
-                        + "Score : 4 "
-                        + "vitesse de croissance de base : 14"
-                        + " température favorable 20° - 28° " +
-                        "humidité favorable 60% - 80% "
-                        +"résistance: 2 "
+                        + "Banane :  "
+                        + "Score : 4  "
+                        + "vitesse de croissance de base : 14 "
+                        + " température favorable 20° - 28°  " +
+                        "humidité favorable 60% - 80%  "
+                        +"résistance: 2  "
                         + "\n"
                         + "\n"
-                        + "Carrotte : "
-                        + "Score : 1 "
-                        + "vitesse de croissance de base : 20"
-                        + " température favorable 8° - 29° " +
-                        "humidité favorable 60% - 80% "
-                        +"résistance: 6 "
+                        + "Carrotte :  "
+                        + "Score : 1  "
+                        + "vitesse de croissance de base : 20  "
+                        + " température favorable 8° - 29°  " +
+                        "humidité favorable 60% - 80%  "
+                        +"résistance: 6  "
                         + "\n"
                         + "\n"
-                        + "Cerise : "
-                        + "Score : 8 "
-                        + "vitesse de croissance de base : 10"
-                        + " température favorable 18° - 20° " +
-                        "humidité favorable 60% - 80% "
-                        +"résistance: 1 "
+                        + "Cerise :  "
+                        + "Score : 8  "
+                        + "vitesse de croissance de base : 10 "
+                        + " température favorable 18° - 20°  " +
+                        "humidité favorable 60% - 80%  "
+                        +"résistance: 1  "
                         + "\n"
                         + "\n"
-                        + "Pêche : "
-                        + "Score : 1 "
-                        + "vitesse de croissance de base : 22"
-                        + " température favorable 10° - 30° " +
-                        "humidité favorable 60% - 80% "
-                        +"résistance: 9 "
+                        + "Pêche :  "
+                        + "Score : 1  "
+                        + "vitesse de croissance de base : 22 "
+                        + " température favorable 10° - 30°  " +
+                        "humidité favorable 60% - 80%  "
+                        +"résistance: 9  "
                         + "\n"
                         + "\n"
-                        + "Salade : "
-                        + "Score : 2 "
-                        + "vitesse de croissance de base : 20"
-                        + " température favorable 18° - 20° " +
-                        "humidité favorable 60% - 80% "
-                        +"résistance: 8 "
+                        + "Salade :  "
+                        + "Score : 2  "
+                        + "vitesse de croissance de base : 20 "
+                        + " température favorable 18° - 20°  " +
+                        "humidité favorable 60% - 80%  "
+                        +"résistance: 8  "
                         + "\n"
                         + "\n"
-                        + "Tomate : "
-                        + "Score : 1 "
-                        + "vitesse de croissance de base : 10"
-                        + " température favorable 18° - 27° " +
-                        "humidité favorable 60% - 80% "
-                        +"résistance: 12 "
+                        + "Tomate :  "
+                        + "Score : 1  "
+                        + "vitesse de croissance de base : 10 "
+                        + " température favorable 18° - 27°  " +
+                        "humidité favorable 60% - 80%  "
+                        +"résistance: 12  "
                         + "\n");
             }
         });
@@ -415,7 +411,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                     mettreAJourAffichage();
                 }
                 else {
-                    JOptionPane.showMessageDialog(popupMenu,"Il y a deja un legume!");
+                    JOptionPane.showMessageDialog(popupMenu,"Il y a deja une variété!");
                 }
             }
             // Action pour Banane
@@ -427,7 +423,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                     mettreAJourAffichage();
                 }
                 else {
-                    JOptionPane.showMessageDialog(popupMenu,"Il y a deja un legume!");
+                    JOptionPane.showMessageDialog(popupMenu,"Il y a deja une variété!");
                 }
             }
             //Action pour Carrotte
@@ -439,7 +435,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                     mettreAJourAffichage();
                 }
                 else {
-                    JOptionPane.showMessageDialog(popupMenu,"Il y a deja un legume!");
+                    JOptionPane.showMessageDialog(popupMenu,"Il y a deja une variété!");
                 }
             }
             //Action pour Cerise
@@ -451,7 +447,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                     mettreAJourAffichage();
                 }
                 else {
-                    JOptionPane.showMessageDialog(popupMenu,"Il y a deja un legume!");
+                    JOptionPane.showMessageDialog(popupMenu,"Il y a deja une variété!");
                 }
             }
 
@@ -464,7 +460,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                     mettreAJourAffichage();
                 }
                 else {
-                    JOptionPane.showMessageDialog(popupMenu,"Il y a deja un legume!");
+                    JOptionPane.showMessageDialog(popupMenu,"Il y a deja une variété!");
                 }
             }
             // Action pour salade
@@ -476,7 +472,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                     mettreAJourAffichage();
                 }
                 else {
-                    JOptionPane.showMessageDialog(popupMenu,"Il y a deja un legume!");
+                    JOptionPane.showMessageDialog(popupMenu,"Il y a deja une variété!");
                 }
             }
             //action pour tomate
@@ -488,7 +484,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                     mettreAJourAffichage();
                 }
                 else {
-                    JOptionPane.showMessageDialog(popupMenu,"Il y a deja un legume!");
+                    JOptionPane.showMessageDialog(popupMenu,"Il y a deja une variété!");
                 }
             }
             //action pour Récolter
@@ -498,6 +494,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                     Case case_actu = simulateurPotager.objetALaPosition(point);
                     Legume leg = case_actu.getLegumeCaseCultivable();
                     System.out.println("on récolte un " + leg.getVariete());
+                    JOptionPane.showMessageDialog(popupMenu,"La variété  " + leg.getVariete() + " a été récoltée");
                     simulateurPotager.actionUtilisateur(x_actu,y_actu,"TERRE");
                     // on augmente le score en fonction du legume et sa taille
                     score_general+=score_general+leg.getScore()*(leg.getSize()/10);
@@ -505,7 +502,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                     mettreAJourAffichage();
                 }
                 else {
-                    JOptionPane.showMessageDialog(popupMenu,"il n'y a aucun legume à récolter");
+                    JOptionPane.showMessageDialog(popupMenu,"il n'y a aucune variété à récolter");
                 }
 
             }
