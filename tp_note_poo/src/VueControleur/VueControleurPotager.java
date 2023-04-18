@@ -251,7 +251,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                         + "vitesse de croissance de base : 10 "
                         + " température favorable 18° - 28° " +
                         "humidité favorable 60% - 80%  "
-                        +"résistance: 4 "
+                        +"résistance: 4 " + " prix: 6€ "
                         + "\n"
                         + "\n"
                         + "Banane :  "
@@ -259,7 +259,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                         + "vitesse de croissance de base : 14 "
                         + " température favorable 20° - 28°  " +
                         "humidité favorable 60% - 80%  "
-                        +"résistance: 2  "
+                        +"résistance: 2  " + " prix: 8€"
                         + "\n"
                         + "\n"
                         + "Carrotte :  "
@@ -267,7 +267,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                         + "vitesse de croissance de base : 20  "
                         + " température favorable 8° - 29°  " +
                         "humidité favorable 60% - 80%  "
-                        +"résistance: 6  "
+                        +"résistance: 6  " + " prix: 3€"
                         + "\n"
                         + "\n"
                         + "Cerise :  "
@@ -275,7 +275,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                         + "vitesse de croissance de base : 10 "
                         + " température favorable 18° - 20°  " +
                         "humidité favorable 60% - 80%  "
-                        +"résistance: 1  "
+                        +"résistance: 1  "  + " prix: 4€"
                         + "\n"
                         + "\n"
                         + "Pêche :  "
@@ -283,7 +283,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                         + "vitesse de croissance de base : 22 "
                         + " température favorable 10° - 30°  " +
                         "humidité favorable 60% - 80%  "
-                        +"résistance: 9  "
+                        +"résistance: 9  "  + " prix: 3€"
                         + "\n"
                         + "\n"
                         + "Salade :  "
@@ -291,7 +291,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                         + "vitesse de croissance de base : 20 "
                         + " température favorable 18° - 20°  " +
                         "humidité favorable 60% - 80%  "
-                        +"résistance: 8  "
+                        +"résistance: 8  "  + " prix: 6€"
                         + "\n"
                         + "\n"
                         + "Tomate :  "
@@ -299,7 +299,7 @@ public class VueControleurPotager extends JFrame implements Observer, ChangeList
                         + "vitesse de croissance de base : 10 "
                         + " température favorable 18° - 27°  " +
                         "humidité favorable 60% - 80%  "
-                        +"résistance: 12  "
+                        +"résistance: 12  "  + " prix: 2€"
                         + "\n");
             }
         });
